@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Wod.Data\Wod.Data.csproj" />
+    <ProjectReference Include="..\Wod.Models\Wod.Models.csproj" />
   </ItemGroup>
 
 </Project>

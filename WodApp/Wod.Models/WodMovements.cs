@@ -12,5 +12,6 @@ namespace WodApp.Data.Domain
 
         [Required]
         public string Name { get; set; }
+        public int? Test { get; set; }
     }
 }

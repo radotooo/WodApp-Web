@@ -10,6 +10,11 @@
     <Content Remove="Views\Shared\password.cshtml" />
     <Content Remove="Views\Shared\register.cshtml" />
     <Content Remove="Views\Shared\tables.cshtml" />
+    <Content Remove="Views\Shared\testViews\Testt.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\Test.cshtml" />
   </ItemGroup>
 
 
@@ -22,14 +27,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="SendGrid" Version="9.13.2" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <None Include="Views\Shared\testViews\login.cshtml" />
-    <None Include="Views\Shared\testViews\password.cshtml" />
-    <None Include="Views\Shared\testViews\register.cshtml" />
-    <None Include="Views\Shared\testViews\tables.cshtml" />
   </ItemGroup>
 
 

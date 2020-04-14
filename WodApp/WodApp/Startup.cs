@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WodApp.Services;
 using WodApp.Services.Test;
+using Microsoft.AspNetCore.Http;
+using Wod.Data;
 
 namespace WodApp
 {
@@ -32,8 +34,19 @@ namespace WodApp
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options =>
+                    Configuration.GetConnectionString("DefaultConnection"))) ;
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             { 
             options.SignIn.RequireConfirmedAccount = true;
                 options.Password.RequireNonAlphanumeric = false;
@@ -43,7 +56,15 @@ namespace WodApp
                 
             })
               .AddEntityFrameworkStores<ApplicationDbContext>();
-              services.AddTransient<IEmailSender, EmailSender>();
+
+            services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
+
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IHomeService, HomeService>();
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
@@ -68,7 +89,7 @@ namespace WodApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
 
             app.UseAuthentication();
