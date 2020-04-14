@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WodApp.Models;
+using WodApp.Services.Test;
 
 namespace WodApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IHomeService homeService)
         {
             _logger = logger;
+            this.homeService = homeService;
         }
 
         public IActionResult Index()
@@ -33,5 +36,22 @@ namespace WodApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult Test()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(CreateMovementInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+
+            }
+            await this.homeService.GreateAsyns(model);
+            return View("Bravo");
+        }
+       
     }
 }
+

@@ -5,14 +5,38 @@
     <UserSecretsId>aspnet-WodApp-51FCB78E-443A-4241-966F-B850DF90E564</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Shared\login.cshtml" />
+    <Content Remove="Views\Shared\password.cshtml" />
+    <Content Remove="Views\Shared\register.cshtml" />
+    <Content Remove="Views\Shared\tables.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="SendGrid" Version="9.13.2" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\Shared\testViews\login.cshtml" />
+    <None Include="Views\Shared\testViews\password.cshtml" />
+    <None Include="Views\Shared\testViews\register.cshtml" />
+    <None Include="Views\Shared\testViews\tables.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wod.Data\Wod.Data.csproj" />
+    <ProjectReference Include="..\Wod.Models\Wod.Models.csproj" />
+    <ProjectReference Include="..\Wod.Services\Wod.Services.csproj" />
   </ItemGroup>
 
 </Project>

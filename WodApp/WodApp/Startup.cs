@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WodApp.Services;
+using WodApp.Services.Test;
 
 namespace WodApp
 {
@@ -43,7 +44,9 @@ namespace WodApp
             })
               .AddEntityFrameworkStores<ApplicationDbContext>();
               services.AddTransient<IEmailSender, EmailSender>();
-    services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddTransient<IHomeService, HomeService>();
+
+            services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddControllersWithViews();
             services.AddRazorPages();
 

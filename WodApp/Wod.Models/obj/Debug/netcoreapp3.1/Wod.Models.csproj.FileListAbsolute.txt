@@ -1,0 +1,8 @@
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\bin\Debug\netcoreapp3.1\Wod.Models.deps.json
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\bin\Debug\netcoreapp3.1\Wod.Models.dll
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\bin\Debug\netcoreapp3.1\Wod.Models.pdb
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\obj\Debug\netcoreapp3.1\Wod.Models.csprojAssemblyReference.cache
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\obj\Debug\netcoreapp3.1\Wod.Models.AssemblyInfoInputs.cache
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\obj\Debug\netcoreapp3.1\Wod.Models.AssemblyInfo.cs
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\obj\Debug\netcoreapp3.1\Wod.Models.dll
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Models\obj\Debug\netcoreapp3.1\Wod.Models.pdb
