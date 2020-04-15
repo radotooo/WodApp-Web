@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <None Include="Views\Home\Test.cshtml" />
+    <None Include="wwwroot\images\.DS_Store" />
   </ItemGroup>
 
 

@@ -55,6 +55,7 @@ namespace WodApp
                 options.Password.RequireUppercase = false;
                 
             })
+                
               .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<CookiePolicyOptions>(
@@ -69,6 +70,10 @@ namespace WodApp
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddControllersWithViews();
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
             services.AddRazorPages();
 
         }
@@ -94,6 +99,7 @@ namespace WodApp
 
             app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

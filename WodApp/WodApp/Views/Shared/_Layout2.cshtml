@@ -1,11 +1,10 @@
 ﻿
 <!doctype html>
-@{ 
-    Layout = "";
-}
+
 <html lang="en">
 <head>
-    <title>Sidebar 09</title>
+    
+    <title>@ViewData["Title"] - WodApp</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -15,7 +14,7 @@
     <link rel="stylesheet" href="~/css/style.css">
 </head>
 <body>
-   
+
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">
@@ -24,8 +23,8 @@
             </div>
             <div class="img bg-wrap text-center py-4" style="background-image: url(/images/bg_1.jpg);">
                 <div class="user-logo">
-                    <div class="img" style="background-image: url('https://ae01.alicdn.com/kf/H325d3f7c73a94f9292d769379ef366caG/Alexis-Texas-Hot-Star-Bikini-Sexy-Model-Girl-Pin-Up-21-Wall-Sticker-Silk-Poster-Art.jpg');"></div>
-                    <h3>Catriona Henderson</h3>
+                    <div class="img" style="background-image: url('https://i.pinimg.com/564x/3f/06/e6/3f06e6d1bfc6f9210d8b28979fb534de.jpg');"></div>
+                    <h3>@User.Identity.Name</h3>
                 </div>
             </div>
             <ul class="list-unstyled components mb-5">
@@ -48,10 +47,7 @@
                     <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
                 </li>
                 <li>
-                    <a class="form-inline" asp-controller="Home" asp-action="OnPost">
-
-                        <span class="fa fa-sign-out mr-3"></span> Sign Out
-                    </a>
+                    <a asp-controller="Home" asp-action="OnPost" asp-route-returnUrl="@Url.Action("Index","Home")"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
                 </li>
             </ul>
 
@@ -59,23 +55,19 @@
 
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
+
+            @RenderBody();
             <h2 class="mb-4">Sidebar #09</h2>
-
-            <div class="nav-item active">
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                    <button type="submit" class="label label-primary">Logout</button>
-                </form>
-            </div>
-
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
     </div>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <script src="~/js/popper.js"></script>
-
     <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>
+
