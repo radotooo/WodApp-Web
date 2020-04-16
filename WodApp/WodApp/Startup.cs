@@ -17,6 +17,8 @@ using WodApp.Services;
 using WodApp.Services.Test;
 using Microsoft.AspNetCore.Http;
 using Wod.Data;
+using LearningSystem.Repository;
+using LearningSystem.Repository.Contracts;
 
 namespace WodApp
 {
@@ -67,6 +69,7 @@ namespace WodApp
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IHomeService, HomeService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddControllersWithViews();

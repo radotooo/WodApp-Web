@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LearningSystem.Repository.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,14 @@ namespace WodApp.Services.Test
 {
     public class HomeService :IHomeService
     {
-        private readonly ApplicationDbContext dbContext;
+        
+        private readonly IRepository<WodMovements> repository;
 
-        public HomeService(ApplicationDbContext dbContext)
+        public HomeService(IRepository<WodMovements> repository)
         {
             
-            this.dbContext = dbContext;
+            
+            this.repository = repository;
         }
 
         
@@ -27,8 +30,8 @@ namespace WodApp.Services.Test
             {
                 Name = input.Name
             };
-            await dbContext.AddAsync(movement);
-            await dbContext.SaveChangesAsync();
+            await repository.AddAsync(movement);
+           
         }
     }
 }
