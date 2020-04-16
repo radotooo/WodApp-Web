@@ -59,7 +59,7 @@ namespace WodApp.Controllers
             await this.homeService.GreateAsyns(model);
             return View("Bravo");
         }
-        public async Task<IActionResult> OnPost(string returnUrl = null)
+        public async Task<IActionResult> SingOut(string returnUrl = null)
         {
             await appUser.SignOutAsync();
             _logger.LogInformation("User logged out.");
