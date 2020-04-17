@@ -19,6 +19,9 @@ using Microsoft.AspNetCore.Http;
 using Wod.Data;
 using LearningSystem.Repository;
 using LearningSystem.Repository.Contracts;
+using CloudinaryDotNet;
+using Wod.Services.Claudinary.Contracts;
+using Wod.Services.Claudinary;
 
 namespace WodApp
 {
@@ -70,6 +73,7 @@ namespace WodApp
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddControllersWithViews();
@@ -78,6 +82,15 @@ namespace WodApp
                 options.HeaderName = "X-CSRF-TOKEN";
             });
             services.AddRazorPages();
+
+            Account account = new CloudinaryDotNet.Account(
+               this.Configuration["Cloudinary:CloudName"],
+               this.Configuration["Cloudinary:ApiKey"],
+               this.Configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
 
         }
 

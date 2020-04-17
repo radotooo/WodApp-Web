@@ -34,10 +34,10 @@
         void Update(T entity);
 
        
-        IQueryable<T> Details();
+       
 
         Task SaveChangesAsync();
 
-        Task<int> GetCountAsync();
+       
     }
 }

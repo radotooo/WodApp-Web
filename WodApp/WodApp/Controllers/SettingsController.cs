@@ -10,6 +10,7 @@ namespace WodApp.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Test"] = "http://res.cloudinary.com/radotooo/image/upload/v1587114349/Test.png";
             return View();
         }
     }

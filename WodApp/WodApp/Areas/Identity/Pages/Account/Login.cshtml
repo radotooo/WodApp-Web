@@ -1,0 +1,272 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "";
+}
+
+
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<style>
+    body {
+        padding-top: 4.2rem;
+        padding-bottom: 4.2rem;
+        background: rgba(0, 0, 0, 0.76);
+    }
+
+    a {
+        text-decoration: none !important;
+    }
+
+    h1, h2, h3 {
+        font-family: 'Kaushan Script', cursive;
+    }
+
+    .myform {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        padding: 1rem;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 100%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 1.1rem;
+        outline: 0;
+        max-width: 500px;
+    }
+
+    .tx-tfm {
+        text-transform: uppercase;
+    }
+
+    .mybtn {
+        border-radius: 50px;
+    }
+
+    .login-or {
+        position: relative;
+        color: #aaa;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .span-or {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: -2px;
+        margin-left: -25px;
+        background-color: #fff;
+        width: 50px;
+        text-align: center;
+    }
+
+    .hr-or {
+        height: 1px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .google {
+        color: #666;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        outline: none;
+        border: 1px solid lightgrey;
+    }
+
+    form .error {
+        color: #ff0000;
+    }
+
+    #second {
+        display: none;
+    }
+</style>>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div id="first">
+                    <div class="myform form ">
+                        <form action="" method="post" name="login">
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input asp-for="Input.Email" class="form-control" placeholder="Enter email">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Input.Password"></label>
+                                <input asp-for="Input.Password" class="form-control" placeholder="Enter password" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                            <div class="form-group">
+                                <p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>
+                            </div>
+                            <div class="col-md-12 text-center ">
+                                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="login-or">
+                                    <hr class="hr-or">
+                                    <span class="span-or">or</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <p class="text-center">
+                                    <a href="javascript:void();" class="google btn mybtn">
+                                        <i class="fa fa-google-plus">
+                                        </i> Signup using Google
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">Don't have account? <a lass="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Sign up here</a></p>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+@*<script>
+        $(function () {
+            $("form[name='login']").validate({
+                rules: {
+
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+
+                    }
+                },
+                messages: {
+                    email: "Please enter a valid email address",
+
+                    password: {
+                        required: "Please enter password",
+
+                    }
+
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+
+    </script>*@
+
+<script>
+    $(function () {
+
+        $("form[name='registration']").validate({
+            rules: {
+                firstname: "required",
+                lastname: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+
+            messages: {
+                firstname: "Please enter your firstname",
+                lastname: "Please enter your lastname",
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 5 characters long"
+                },
+                email: "Please enter a valid email address"
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    });
+</script>>
+
+
+
+@*<div class="row">
+        <div class="col-md-4">
+            <section>
+                <form id="account" method="post">
+                    <h4>Use a local account to log in.</h4>
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>*@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

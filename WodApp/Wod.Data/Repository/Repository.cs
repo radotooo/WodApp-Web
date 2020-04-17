@@ -16,20 +16,14 @@
         private readonly ApplicationDbContext dbContext;
 
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Repository{T}"/> class.
-        /// </summary>
+        
         public Repository(ApplicationDbContext dbContext)
         {
            
             this.dbContext = dbContext;
         }
 
-        /// <summary>
-        /// Add asynchronous entity to the database.
-        /// </summary>
-        /// <param name="entity">Entity for adding.</param>
-        /// <returns></returns>
+       
         public async Task AddAsync(T entity)
         {
             await this.dbContext
@@ -45,6 +39,7 @@
             await this.dbContext
                 .Set<T>()
                 .AddRangeAsync(entity);
+                
                 
 
             await this.dbContext.SaveChangesAsync();
@@ -98,12 +93,7 @@
                 
 
        
-        public IQueryable<T> Details() 
-            => this.dbContext
-                .Set<T>();
-              
-
-       
+        
         public void Update(T entity)
         {
             this.dbContext
@@ -119,10 +109,7 @@
 
         public async Task SaveChangesAsync() => await this.dbContext.SaveChangesAsync();
 
-        public async Task<int> GetCountAsync() 
-            => await this.dbContext
-                .Set<T>()
-                .CountAsync();
+        
 
 
         public void Dispose()

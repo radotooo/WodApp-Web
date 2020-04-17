@@ -1,0 +1,14 @@
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\TestStuff.exe
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.AssemblyInfoInputs.cache
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.AssemblyInfo.cs
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\TestStuff.deps.json
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\TestStuff.runtimeconfig.json
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\TestStuff.runtimeconfig.dev.json
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\TestStuff.dll
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\TestStuff.pdb
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.csprojAssemblyReference.cache
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.csproj.CopyComplete
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.dll
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.pdb

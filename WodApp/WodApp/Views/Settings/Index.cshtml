@@ -4,18 +4,18 @@
     
 }
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+@*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">*@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<style>
+@*<style>
     .body {
         margin-top: 20px;
         background: #f8f8f8;
     }
-</style>
+</style>*@
 
 <div class="container">
     <div class="row flex-lg-nowrap">
-        @*<div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+        <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
             <div class="card p-3">
                 <div class="e-navlist e-navlist--active-bg">
                     <ul class="nav">
@@ -25,7 +25,7 @@
                     </ul>
                 </div>
             </div>
-        </div>*@
+        </div>
 
         <div class="col">
             <div class="row">
@@ -35,10 +35,8 @@
                             <div class="e-profile">
                                 <div class="row">
                                     <div class="col-12 col-sm-auto mb-3">
-                                        <div class="mx-auto" style="width: 140px;">
-                                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
-                                            </div>
+                                        <div class="container">
+                                            <img src="@ViewData["Test"]" class="rounded-circle" alt="Cinque Terre" width="140" height="140">
                                         </div>
                                     </div>
                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
@@ -52,7 +50,7 @@
 
                                                     <i class="fa fa-fw fa-camera"></i>
                                                     <span>Change Photo</span>
-                                                    
+
 
                                                 </button>
                                             </div>
@@ -64,8 +62,20 @@
                                     </div>
                                 </div>
                                 <ul class="nav nav-tabs">
-                                    <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                                    <li class="nav-item">
+                                        <a href="" class="active nav-link">Profile</a>
+                                    </li>
+
+                                    <li class="nav-item"><a href="" class="active nav-link">Change Password</a></li>
+
+
+
                                 </ul>
+                                <div class="form-group">
+                                    <label "></label>
+                                    <input asp-for="Wallpaper" type="file" name="Wallpaper" />
+                                    <span asp-validation-for="Wallpaper" class="text-danger"></span>
+                                </div>
                                 <div class="tab-content pt-3">
                                     <div class="tab-pane active">
                                         <form class="form" novalidate="">
@@ -79,9 +89,9 @@
                                                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                                             </div>
                                                             @*<div class="form-group">
-                                                                    <label>Full Name</label>
-                                                                    <input cla@ss="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
-                                                                @*</div>*@
+                                        <label>Full Name</label>
+                                        <input cla@ss="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
+                                    @*</div>*@
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group">
