@@ -22,6 +22,7 @@ using LearningSystem.Repository.Contracts;
 using CloudinaryDotNet;
 using Wod.Services.Claudinary.Contracts;
 using Wod.Services.Claudinary;
+using Wod.Services.Claims;
 
 namespace WodApp
 {
@@ -60,8 +61,9 @@ namespace WodApp
                 options.Password.RequireUppercase = false;
                 
             })
-                
-              .AddEntityFrameworkStores<ApplicationDbContext>();
+               
+              .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
 
             services.Configure<CookiePolicyOptions>(
                 options =>

@@ -1,12 +1,12 @@
 ﻿@{
-        //if (!Context.User.Identity.IsAuthenticated)
-        //{
-        Layout = "_Layout2";
-    @*}
+    if (!Context.User.Identity.IsAuthenticated)
+    {
+        Layout = "_LayoutUser";
+    }
     else
-    {*@
-    //Layout = "_Layout2";
-    @*}*@
+    {
+    Layout = "_LayoutUser";
 
+    }
 }
 

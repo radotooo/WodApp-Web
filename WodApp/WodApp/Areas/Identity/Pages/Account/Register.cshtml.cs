@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Wod.Data;
+using Wod.Models.Common;
 
 namespace WodApp.Areas.Identity.Pages.Account
 {
@@ -57,10 +58,20 @@ namespace WodApp.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [StringLength(ModelValidation.NameMaxLength, ErrorMessage = ModelErrorMessages.NameMinMaxLenghtErrorMsg, MinimumLength = ModelValidation.NameMinLength)]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+            [Required]
+            [StringLength(ModelValidation.NameMaxLength, ErrorMessage = ModelErrorMessages.NameMinMaxLenghtErrorMsg, MinimumLength = ModelValidation.NameMinLength)]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,11 +86,20 @@ namespace WodApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                
+                //var emailTaken = _userManager.FindByEmailAsync(Input.Email);
+                //if (emailTaken!=null)
+                //{
+                //    ModelState.AddModelError(string.Empty,"Email awready taken!");
+                //}
                 var user = new ApplicationUser
-                { 
-                    UserName = Input.Email, 
+                {
+                    UserName = Input.Email,
                     Email = Input.Email,
-                    CreatedOn = DateTime.UtcNow
+                    CreatedOn = DateTime.UtcNow,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName
+
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
