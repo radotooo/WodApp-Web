@@ -41,7 +41,7 @@
                     <a href="#"><span class="fa fa-trophy mr-3"></span> Top Review</a>
                 </li>
                 <li>
-                    <a asp-controller="Settings" asp-action="Index"><span class="fa fa-cog mr-3"></span> Settings</a>
+                    <a asp-controller="Profile" asp-action="Index"><span class="fa fa-user mr-3"></span> Profile</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
@@ -58,11 +58,12 @@
         <div id="content" class="p-4 p-md-5 pt-5">
 
             @RenderBody()
-           
+
         </div>
     </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="~/js/popper.js"></script>
     <script src="~/js/main.js"></script>
     @RenderSection("Scripts", required: false)

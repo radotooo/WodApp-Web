@@ -47,6 +47,12 @@ namespace WodApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+
+            [Required]
+            [StringLength(ModelValidation.NameMaxLength, ErrorMessage = ModelErrorMessages.NameMinMaxLenghtErrorMsg, MinimumLength = ModelValidation.NameMinLength)]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -87,14 +93,10 @@ namespace WodApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 
-                //var emailTaken = _userManager.FindByEmailAsync(Input.Email);
-                //if (emailTaken!=null)
-                //{
-                //    ModelState.AddModelError(string.Empty,"Email awready taken!");
-                //}
+                
                 var user = new ApplicationUser
                 {
-                    UserName = Input.Email,
+                    UserName = Input.Username,
                     Email = Input.Email,
                     CreatedOn = DateTime.UtcNow,
                     FirstName = Input.FirstName,

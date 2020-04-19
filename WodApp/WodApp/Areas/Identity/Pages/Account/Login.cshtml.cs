@@ -44,8 +44,8 @@ namespace WodApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            
+            public string Username { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -78,9 +78,10 @@ namespace WodApp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -98,7 +99,8 @@ namespace WodApp.Areas.Identity.Pages.Account
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
+                   
+                    return RedirectToPage(ViewData["gg"]="dabeda");
                 }
             }
 

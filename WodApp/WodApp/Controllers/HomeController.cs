@@ -16,6 +16,7 @@ using WodApp.Services.Test;
 
 namespace WodApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,7 +31,8 @@ namespace WodApp.Controllers
             this.appUser = appUser;
             this.cloudinaryService = cloudinaryService;
         }
-        [Authorize]
+
+        
         public IActionResult Index()
         {
 
@@ -55,13 +57,8 @@ namespace WodApp.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-
-            ViewData["Test"] = "http://res.cloudinary.com/radotooo/image/upload/v1587114349/Test.png";
-            return View();
-        }
+      
+  
 
         [HttpPost]
         public async Task<IActionResult> Add(CreateMovementInputModel model)
@@ -91,10 +88,18 @@ namespace WodApp.Controllers
                 return RedirectToAction("Home");
             }
         }
+        public IActionResult Profile()
+        {
+
+            ViewData["Test"] = "http://res.cloudinary.com/radotooo/image/upload/v1587114349/Test.png";
+            return View();
+        }
+
+
         public IActionResult Test2()
         {
 
-            
+           
             return View();
         }
     }

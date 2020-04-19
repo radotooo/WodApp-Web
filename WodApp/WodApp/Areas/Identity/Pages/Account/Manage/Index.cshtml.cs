@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Wod.Data;
+using Wod.Models.Common;
 
 namespace WodApp.Areas.Identity.Pages.Account.Manage
 {
@@ -36,6 +37,21 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+
+            [Required]
+            [StringLength(ModelValidation.NameMaxLength, ErrorMessage = ModelErrorMessages.NameMinMaxLenghtErrorMsg, MinimumLength = ModelValidation.NameMinLength)]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+            [Required]
+            [StringLength(ModelValidation.NameMaxLength, ErrorMessage = ModelErrorMessages.NameMinMaxLenghtErrorMsg, MinimumLength = ModelValidation.NameMinLength)]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+            [StringLength(ModelValidation.AddressLength, ErrorMessage = ModelErrorMessages.AddressMaxLengh)]
+
+            public string Address { get; set; }
+
+
         }
 
         private async Task LoadAsync(ApplicationUser user)

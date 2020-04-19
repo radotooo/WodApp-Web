@@ -21,6 +21,8 @@ namespace Wod.Services.Claims
         {
             var identity = await base.GenerateClaimsAsync(user);
             identity.AddClaim(new Claim("FullName", $"{user.FirstName} {user.LastName}" ?? user.Email));
+            identity.AddClaim(new Claim("Login", $"{DateTime.UtcNow}"));
+
             return identity;
         }
     }

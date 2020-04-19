@@ -1,81 +1,123 @@
-﻿
-<!doctype html>
-@{ 
-    Layout = "";
-}
-<html lang="en">
-<head>
-    <title>Sidebar 09</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+﻿@*<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
+<!------ Include the above in your HEAD tag ---------->
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
-   
-    <div class="wrapper d-flex align-items-stretch">
-        <nav id="sidebar">
-            <div class="custom-menu">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                </button>
-            </div>
-            <div class="img bg-wrap text-center py-4" style="background-image: url(/images/bg_1.jpg);">
-                <div class="user-logo">
-                    <div class="img" style="background-image: url('https://ae01.alicdn.com/kf/H325d3f7c73a94f9292d769379ef366caG/Alexis-Texas-Hot-Star-Bikini-Sexy-Model-Girl-Pin-Up-21-Wall-Sticker-Silk-Poster-Art.jpg');"></div>
-                    <h3>Catriona Henderson</h3>
+<div class="container">
+    <div class="row">
+        <div class="span8 ">
+            <div class="row ">
+                <div class="span8">
+                    <h4><strong><a href="#">Title of the post</a></strong></h4>
                 </div>
             </div>
-            <ul class="list-unstyled components mb-5">
-                <li class="active">
-                    <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-download mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Download</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-gift mr-3"></span> Gift Code</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-trophy mr-3"></span> Top Review</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-cog mr-3"></span> Settings</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
-                </li>
-                <li>
-                    <a class="form-inline" asp-controller="Home" asp-action="OnPost">
+            <div class="row">
 
-                        <span class="fa fa-sign-out mr-3"></span> Sign Out
-                    </a>
-                </li>
-            </ul>
+                <div style="text-align: center;">
+                    <img src="https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
+                </div>
 
-        </nav>
 
-        <!-- Page Content  -->
-        <div id="content" class="p-4 p-md-5 pt-5">
-            <h2 class="mb-4">Sidebar #09</h2>
-
-            <div class="nav-item active">
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                    <button type="submit" class="label label-primary">Logout</button>
-                </form>
             </div>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div class="row">
+                <div class="span8">
+                    <p></p>
+                    <p>
+                        <i class="fa fa-user" ></i> by <a href="#">John</a>
+                        | <i class="fa fa-calendar" style="color:Highlight"></i> Sept 16th, 2012
+                        | <i class="fa fa-comment" ></i> <a href="#">3 Comments</a>
+                        | <i class="fas fa-share" ></i> <a href="#">39 Shares</a>
+                        | <i class="fas fa-tags" ></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
+                        <i class="fas fa-thumbs-up" style="color:Highlight"></i>
+                        <i class="fas fa-thumbs-down" style="color:Highlight"></i>
+                        <a href="#"><span class="label label-info">Bootstrap</span></a>
+                        <a href="#"><span class="label label-info">UI</span></a>
+                        <a href="#"><span class="label label-info">growth</span></a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <hr>
 
-    <script src="~/js/popper.js"></script>
+    <div class="row">
+        <div class="span8">
+            <div class="row">
+                <div class="span8">
+                    <h4><strong><a href="#">Title of the post</a></strong></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div style="text-align: center;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
+                </div>
+                @*<div class="span2">
+                        <a href="#" class="thumbnail">
+                            <img src="http://placehold.it/260x180" alt="">
+                        </a>
+                    </div>*@
 
-    <script src="~/js/main.js"></script>
-</body>
-</html>
+            </div>
+            <div class="row">
+                <div class="span8">
+                    <p></p>
+                    <p>
+                        <i class="icon-user"></i> by <a href="#">Mark</a>
+                        | <i class="icon-calendar"></i> Sept 16th, 2012
+                        | <i class="icon-comment"></i> <a href="#">3 Comments</a>
+                        | <i class="icon-share"></i> <a href="#">39 Shares</a>
+                        | <i class="icon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
+                        <a href="#"><span class="label label-info">Bootstrap</span></a>
+                        <a href="#"><span class="label label-info">UI</span></a>
+                        <a href="#"><span class="label label-info">growth</span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="span8">
+            <div class="row">
+                <div class="span8">
+                    <h4><strong><a href="#">Title of the post</a></strong></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span2">
+                    <a href="#" class="thumbnail">
+                        <img src="http://placehold.it/260x180" alt="">
+                    </a>
+                </div>
+                <div class="span6">
+                    <p>
+                        Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque, ad nobis propriae quaerendum sea.
+                    </p>
+                    <p><a href="#">Read more</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span8">
+                    <p></p>
+                    <p>
+                        <i class="icon-user"></i> by <a href="#">Mark</a>
+                        | <i class="icon-calendar"></i> Sept 16th, 2012
+                        | <i class="icon-comment"></i> <a href="#">3 Comments</a>
+                        | <i class="icon-share"></i> <a href="#">39 Shares</a>
+                        | <i class="icon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
+                        <a href="#"><span class="label label-info">Bootstrap</span></a>
+                        <a href="#"><span class="label label-info">UI</span></a>
+                        <a href="#"><span class="label label-info">growth</span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
