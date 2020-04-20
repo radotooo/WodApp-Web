@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using LearningSystem.Repository.Contracts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Wod.Data;
 using Wod.Models.Common;
+using Wod.Models.CustomValidationAttributes;
+using Wod.Services.Claudinary.Contracts;
 
 namespace WodApp.Areas.Identity.Pages.Account.Manage
 {
@@ -17,15 +20,18 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IRepository<ApplicationUser> appUser;
+        private readonly ICloudinaryService cloudinaryService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IRepository<ApplicationUser> appUser)
+            IRepository<ApplicationUser> appUser,
+            ICloudinaryService cloudinaryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             this.appUser = appUser;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public string Username { get; set; }
@@ -52,9 +58,15 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
             [StringLength(ModelValidation.AddressLength, ErrorMessage = ModelErrorMessages.AddressMaxLengh)]
-
             public string Address { get; set; }
 
+            //[Required(ErrorMessage = "Please select a file.")]
+            
+            [DataType(DataType.Upload)]
+            [MaxFileSize(5 * 1024 * 1024)]
+            [AllowedExtensions(new string[] { ".jpg", ".png" })]
+            [Display(Name = "Change Avatar")]
+            public IFormFile Photo { get; set; }
 
         }
 
@@ -71,8 +83,8 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber,
                FirstName = user.FirstName,
                LastName=user.LastName,
-               Address=user.Address
-                
+               Address=user.Address,
+               Photo=null
             };
         }
 
@@ -125,7 +137,7 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
             }
             if(Input.LastName != user.LastName)
             {
-                user.LastName = Input.FirstName;
+                user.LastName = Input.LastName;
                var UpdateUserLastName =  await _userManager.UpdateAsync(user);
                 if (!UpdateUserLastName.Succeeded)
                 {
@@ -136,11 +148,26 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
             if (Input.Address != user.Address)
             {
                 user.Address = Input.Address;
-                var UpdateUserLastName = await _userManager.UpdateAsync(user);
-                if (!UpdateUserLastName.Succeeded)
+                var UpdateUserAddress = await _userManager.UpdateAsync(user);
+                if (!UpdateUserAddress.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
                     throw new InvalidOperationException($"Unexpected error occurred setting address for user with ID '{userId}'.");
+                }
+            }
+            if (Input.Photo != null)
+            {
+                var coverUrl = await this.cloudinaryService
+                 .UploadAsync(Input.Photo, user.UserName);
+                if (coverUrl != user.AvatarUrl)
+                {
+                    user.AvatarUrl = coverUrl;
+                    var updateUserUrl = await _userManager.UpdateAsync(user);
+                    if (!updateUserUrl.Succeeded)
+                    {
+                        var userId = await _userManager.GetUserIdAsync(user);
+                        throw new InvalidOperationException($"Unexpected error occurred setting avatar for user with ID '{userId}'.");
+                    }
                 }
             }
 
@@ -148,5 +175,6 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+       
     }
 }
