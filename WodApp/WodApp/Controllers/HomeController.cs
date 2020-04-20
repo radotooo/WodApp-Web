@@ -16,7 +16,7 @@ using WodApp.Services.Test;
 
 namespace WodApp.Controllers
 {
-    [Authorize]
+   
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -32,7 +32,7 @@ namespace WodApp.Controllers
             this.cloudinaryService = cloudinaryService;
         }
 
-        
+        [Authorize]
         public IActionResult Index()
         {
 
@@ -40,7 +40,7 @@ namespace WodApp.Controllers
 
             return View();
         }
-
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
@@ -75,6 +75,7 @@ namespace WodApp.Controllers
 
             return View("Bravo",model);
         }
+
         public async Task<IActionResult> SingOut(string returnUrl = null)
         {
             await appUser.SignOutAsync();
@@ -88,6 +89,7 @@ namespace WodApp.Controllers
                 return RedirectToAction("Home");
             }
         }
+
         public IActionResult Profile()
         {
 

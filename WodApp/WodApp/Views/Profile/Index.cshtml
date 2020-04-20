@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Wod.Models.WodApp.VIewModels
+@model UserViewModel
 @inject UserManager<Wod.Data.ApplicationUser> appUser
+
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -61,6 +64,7 @@
         font-weight: 600;
         color: #6c757d;
         cursor: pointer;
+       
     }
 
     .proile-rating {
@@ -135,9 +139,9 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        @User.Identity.Name
+                        @Model.Username
                     </h5>
-                    <div class="text-muted"><small>Joined @appUser.GetUserAsync(User).Result.CreatedOn.ToString("dddd dd MMMM yyyy")</small></div>
+                    <div class="text-muted"><small>Joined @Model.CreatedOn.ToString("dddd dd MMMM yyyy")</small></div>
 
 
                     <p class="proile-rating">RANKINGS : <span>8/10</span></p>
@@ -152,7 +156,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a asp-area="Identity" asp-page="/Account/Manage/Index">Edit Profile</a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" >Edit Profile</a>
             </div>
         </div>
         <div class="row">
@@ -179,7 +183,7 @@
                                 <label>First Name</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@appUser.GetUserAsync(User).Result.FirstName</p>
+                                <p>@Model.FirstName</p>
                             </div>
                         </div>
                         <div class="row">
@@ -187,7 +191,7 @@
                                 <label>Last Name</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@appUser.GetUserAsync(User).Result.LastName</p>
+                                <p>@Model.LastName</p>
                             </div>
                         </div>
                         <div class="row">
@@ -195,7 +199,7 @@
                                 <label>Email</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@appUser.GetUserAsync(User).Result.Email</p>
+                                <p>@Model.Email</p>
                             </div>
                         </div>
                         <div class="row">
@@ -203,7 +207,7 @@
                                 <label>Phone</label>
                             </div>
                             <div class="col-md-6">
-                                <p>....ToDo</p>
+                                <p>@Model.Phone</p>
                             </div>
                         </div>
                         <div class="row">
@@ -212,7 +216,7 @@
                             </div>
                             <div class="col-md-6">
                                 <p>
-                                    ...ToDo
+                                    @Model.Address
                                 </p>
                             </div>
                         </div>
@@ -270,7 +274,6 @@
         </div>
     </form>
 </div>
-<script>
-    $("#home").click(function () {
-        $("#home").show();
+<script asp->
+
 </script>

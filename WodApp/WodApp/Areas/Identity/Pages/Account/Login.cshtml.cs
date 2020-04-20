@@ -100,7 +100,7 @@ namespace WodApp.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                    
-                    return RedirectToPage(ViewData["gg"]="dabeda");
+                    return RedirectToPage();
                 }
             }
 

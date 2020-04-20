@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using LearningSystem.Repository.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,13 +16,16 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IRepository<ApplicationUser> appUser;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IRepository<ApplicationUser> appUser)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.appUser = appUser;
         }
 
         public string Username { get; set; }
@@ -58,12 +62,17 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+           
+           
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+               FirstName = user.FirstName,
+               LastName=user.LastName,
+               Address=user.Address
+                
             };
         }
 
@@ -101,6 +110,37 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
+                }
+            }
+            if(Input.FirstName  != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+              var UpdateUserFirstName =   await _userManager.UpdateAsync(user);
+
+                if (!UpdateUserFirstName.Succeeded)
+                {
+                    var userId = await _userManager.GetUserIdAsync(user);
+                    throw new InvalidOperationException($"Unexpected error occurred setting first name for user with ID '{userId}'.");
+                }
+            }
+            if(Input.LastName != user.LastName)
+            {
+                user.LastName = Input.FirstName;
+               var UpdateUserLastName =  await _userManager.UpdateAsync(user);
+                if (!UpdateUserLastName.Succeeded)
+                {
+                    var userId = await _userManager.GetUserIdAsync(user);
+                    throw new InvalidOperationException($"Unexpected error occurred setting last name for user with ID '{userId}'.");
+                }
+            }
+            if (Input.Address != user.Address)
+            {
+                user.Address = Input.Address;
+                var UpdateUserLastName = await _userManager.UpdateAsync(user);
+                if (!UpdateUserLastName.Succeeded)
+                {
+                    var userId = await _userManager.GetUserIdAsync(user);
+                    throw new InvalidOperationException($"Unexpected error occurred setting address for user with ID '{userId}'.");
                 }
             }
 

@@ -1,9 +1,11 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Wod.Data.ApplicationUser> UserManager
+
 <!doctype html>
 
 <html lang="en">
 <head>
-    
+
     <title>@ViewData["Title"] - WodApp</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +25,7 @@
             </div>
             <div class="img bg-wrap text-center py-4" style="background-image: url(/images/bg_1.jpg);">
                 <div class="user-logo">
-                    <div class="img" style="background-image: url('https://i.pinimg.com/564x/3f/06/e6/3f06e6d1bfc6f9210d8b28979fb534de.jpg');"></div>
+                    <div class="img" style="background-image: url('@UserManager.GetUserAsync(User).Result.AvatarUrl');"></div>
                     <h3>@User.FindFirst("FullName").Value</h3>
                 </div>
             </div>

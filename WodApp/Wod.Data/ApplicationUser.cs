@@ -17,6 +17,7 @@ namespace Wod.Data
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        public string Address { get; set; }
 
     }
 }
