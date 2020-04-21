@@ -11,7 +11,8 @@
         where T : class
         
     {
-       
+        IQueryable<T> All();
+
         Task<T> FindByIdAsync(string id);
 
         

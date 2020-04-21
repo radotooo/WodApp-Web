@@ -90,10 +90,11 @@
                 .Set<T>()
                 .Where(predicate)
                 .AsEnumerable<T>();
-                
 
-       
-        
+
+        public virtual IQueryable<T> All() => this.dbContext
+                .Set<T>();
+
         public void Update(T entity)
         {
             this.dbContext

@@ -14,6 +14,7 @@ namespace Wod.Models
             Comments = new HashSet<Comment>();
         }
         public int Id { get; set; }
+        public string PictureUrl { get; set; }
         public DateTime CreatedOn { get ; set ; }
         public DateTime? ModifiedOn { get ; set ; }
         public bool IsDeleted { get ; set; }
@@ -21,7 +22,7 @@ namespace Wod.Models
         [MaxLength(ModelValidation.NameMaxLength)]
         public string Tittle { get; set; }
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

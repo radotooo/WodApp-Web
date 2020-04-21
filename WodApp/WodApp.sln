@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wod.Services", "Wod.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wod.Data", "Wod.Data\Wod.Data.csproj", "{D5599E45-2312-4298-AB59-D1E8FB7532C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStuff", "TestStuff\TestStuff.csproj", "{6E9A57E0-395D-475E-9B1A-54CAB763C783}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStuff", "TestStuff\TestStuff.csproj", "{6E9A57E0-395D-475E-9B1A-54CAB763C783}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WodApp.GlobalValidation", "WodApp.GlobalValidation\WodApp.GlobalValidation.csproj", "{ABFB86B6-B560-4F18-84C0-D9BF5F768691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6E9A57E0-395D-475E-9B1A-54CAB763C783}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E9A57E0-395D-475E-9B1A-54CAB763C783}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E9A57E0-395D-475E-9B1A-54CAB763C783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABFB86B6-B560-4F18-84C0-D9BF5F768691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFB86B6-B560-4F18-84C0-D9BF5F768691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFB86B6-B560-4F18-84C0-D9BF5F768691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFB86B6-B560-4F18-84C0-D9BF5F768691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

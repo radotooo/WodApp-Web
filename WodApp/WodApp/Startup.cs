@@ -23,6 +23,13 @@ using CloudinaryDotNet;
 using Wod.Services.Claudinary.Contracts;
 using Wod.Services.Claudinary;
 using Wod.Services.Claims;
+using WodApp.Services.Mapping;
+using WodApp.Models;
+using System.Reflection;
+using Wod.Services.PostService.Contracts;
+using Wod.Services.PostService;
+using Wod.Services.CategoryService.Contracts;
+using Wod.Services.CategoryService;
 
 namespace WodApp
 {
@@ -38,9 +45,10 @@ namespace WodApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"))) ;
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection"))) ;
+            services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -76,6 +84,10 @@ namespace WodApp
             services.AddTransient<IHomeService, HomeService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+
+
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddControllersWithViews();
@@ -99,6 +111,8 @@ namespace WodApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -124,6 +138,7 @@ namespace WodApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("posts", "{controller=Post}/{action=ShowPost}/{id}");
                 endpoints.MapRazorPages();
             });
         }

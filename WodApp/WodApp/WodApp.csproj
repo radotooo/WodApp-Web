@@ -36,6 +36,7 @@
     <ProjectReference Include="..\Wod.Data\Wod.Data.csproj" />
     <ProjectReference Include="..\Wod.Models\Wod.Models.csproj" />
     <ProjectReference Include="..\Wod.Services\Wod.Services.csproj" />
+    <ProjectReference Include="..\WodApp.GlobalValidation\WodApp.GlobalValidation.csproj" />
   </ItemGroup>
 
 </Project>

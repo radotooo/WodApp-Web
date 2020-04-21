@@ -10,8 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Wod.Data;
 using Wod.Models.Common;
-using Wod.Models.CustomValidationAttributes;
+
 using Wod.Services.Claudinary.Contracts;
+using Wod.Models.CustomValidationAttributes;
 
 namespace WodApp.Areas.Identity.Pages.Account.Manage
 {

@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\Wod.Models\\Wod.Models.csproj": {
-                "projectPath": "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\Wod.Models\\Wod.Models.csproj"
+              "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\WodApp.GlobalValidation.csproj": {
+                "projectPath": "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\WodApp.GlobalValidation.csproj"
               }
             }
           }
@@ -50,6 +50,10 @@
               "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
               "version": "[3.1.1, )"
             },
@@ -108,7 +112,14 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\Wod.Data\\Wod.Data.csproj": {
+                "projectPath": "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\Wod.Data\\Wod.Data.csproj"
+              },
+              "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\WodApp.GlobalValidation.csproj": {
+                "projectPath": "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\WodApp.GlobalValidation.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -219,6 +230,61 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\WodApp.GlobalValidation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\WodApp.GlobalValidation.csproj",
+        "projectName": "WodApp.GlobalValidation",
+        "projectPath": "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\WodApp.GlobalValidation.csproj",
+        "packagesPath": "C:\\Users\\Radotooo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Radotooo\\source\\repos\\WodApp-Web\\WodApp\\WodApp.GlobalValidation\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Radotooo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

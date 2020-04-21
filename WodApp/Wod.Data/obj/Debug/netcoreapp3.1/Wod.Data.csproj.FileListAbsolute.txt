@@ -6,8 +6,8 @@ C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\obj\Debug\netcoreapp3.
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\obj\Debug\netcoreapp3.1\Wod.Data.AssemblyInfo.cs
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\obj\Debug\netcoreapp3.1\Wod.Data.csprojAssemblyReference.cache
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\bin\Debug\netcoreapp3.1\Wod.Data.pdb
-C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\bin\Debug\netcoreapp3.1\Wod.Models.dll
-C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\bin\Debug\netcoreapp3.1\Wod.Models.pdb
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\obj\Debug\netcoreapp3.1\Wod.Data.csproj.CopyComplete
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\obj\Debug\netcoreapp3.1\Wod.Data.dll
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\obj\Debug\netcoreapp3.1\Wod.Data.pdb
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\bin\Debug\netcoreapp3.1\WodApp.GlobalValidation.dll
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\Wod.Data\bin\Debug\netcoreapp3.1\WodApp.GlobalValidation.pdb
