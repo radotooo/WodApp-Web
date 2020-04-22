@@ -23,13 +23,14 @@ using CloudinaryDotNet;
 using Wod.Services.Claudinary.Contracts;
 using Wod.Services.Claudinary;
 using Wod.Services.Claims;
-using WodApp.Services.Mapping;
+
 using WodApp.Models;
 using System.Reflection;
 using Wod.Services.PostService.Contracts;
 using Wod.Services.PostService;
 using Wod.Services.CategoryService.Contracts;
 using Wod.Services.CategoryService;
+
 
 namespace WodApp
 {
@@ -111,7 +112,8 @@ namespace WodApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+           
+            
 
             if (env.IsDevelopment())
             {

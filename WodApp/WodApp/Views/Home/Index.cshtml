@@ -1,150 +1,64 @@
-﻿
-@model WodApp.Models.CreateMovementInputModel
+﻿@model Wod.Models.WodApp.VIewModels.Post.IndexPostViewModel
 
 @{
     ViewData["Title"] = "Home Page";
+
 }
 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-@*<div class="container">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        <ul>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-            </li>
-
-
-        </ul>
-        <a class="bg-primary" type="button" asp-controller="home" asp-action="Add">Add</a>>
-        <a class="bg-primary" type="button" asp-controller="home" asp-action="Test2">TEST2</a>>
-
-
-    </div>*@
-@*<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
-<!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
-    <div class="row">
-        <div class="span8 ">
-            <div class="row ">
-                <div class="span8">
-                    <h4><strong><a href="#">Title of the post</a></strong></h4>
-                </div>
-            </div>
+@{
+    foreach (var post in Model.Posts)
+    {
+
+        <div class="container">
             <div class="row">
+                <div class="span8 ">
+                    <div class="row d-flex justify-content-center">
+                        <div class="span8">
+                            <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id" >@post.Tittle</a></strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
 
-                <div style="text-align: center;">
-                    <img src="https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
-                </div>
+                        <div style="text-align: center;">
+                            <img src="@post.PictureUrl" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
+                        </div>
 
 
-            </div>
-            <div class="row">
-                <div class="span8">
-                    <p></p>
-                    <p>
-                        <i class="fa fa-user"></i> by <a href="#">John</a>
-                        | <i class="fa fa-calendar" style="color:Highlight"></i> Sept 16th, 2012
-                        | <i class="fa fa-comment"></i> <a href="#">3 Comments</a>
-                        | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
-                        | <i class="fas fa-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
-                        <i class="fas fa-thumbs-up" style="color:Highlight"></i>
-                        <i class="fas fa-thumbs-down" style="color:Highlight"></i>
-                        <a href="#"><span class="label label-info">Bootstrap</span></a>
-                        <a href="#"><span class="label label-info">UI</span></a>
-                        <a href="#"><span class="label label-info">growth</span></a>
-                    </p>
+                    </div>
+                    <div class="row">
+                        <div class="span8">
+                            <p></p>
+                            <p>
+                                <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
+                                | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MMMM dd yyyy")
+                                | <i class="fa fa-comment"></i> <a href="#">Comments @post.Comments.Count()</a>
+                                | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
+                                | <i class="fas fa-tags"></i> Tags : <a href="#"><span class="label label-info">@post.CategoryName</span></a>
+                                <i class="fas fa-thumbs-up" style="color:Highlight"></i>
+                                <i class="fas fa-thumbs-down" style="color:Highlight"></i>
+                                @*<a href="#"><span class="label label-info">Bootstrap</span></a>
+                                    <a href="#"><span class="label label-info">UI</span></a>
+                                    <a href="#"><span class="label label-info">growth</span></a>*@
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <hr>
+        <hr />
+    }
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-    <div class="row">
-        <div class="span8">
-            <div class="row">
-                <div class="span8">
-                    <h4><strong><a href="#">Title of the post</a></strong></h4>
-                </div>
-            </div>
-            <div class="row">
-                <div style="text-align: center;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
-                </div>
-                @*<div class="span2">
-                        <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/260x180" alt="">
-                        </a>
-                    </div>*@
 
-            </div>
-            <div class="row">
-                <div class="span8">
-                    <p></p>
-                    <p>
-                        <i class="icon-user"></i> by <a href="#">Mark</a>
-                        | <i class="icon-calendar"></i> Sept 16th, 2012
-                        | <i class="icon-comment"></i> <a href="#">3 Comments</a>
-                        | <i class="icon-share"></i> <a href="#">39 Shares</a>
-                        | <i class="icon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
-                        <a href="#"><span class="label label-info">Bootstrap</span></a>
-                        <a href="#"><span class="label label-info">UI</span></a>
-                        <a href="#"><span class="label label-info">growth</span></a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
 
-    <div class="row">
-        <div class="span8">
-            <div class="row">
-                <div class="span8">
-                    <h4><strong><a href="#">Title of the post</a></strong></h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span2">
-                    <a href="#" class="thumbnail">
-                        <img src="http://placehold.it/260x180" alt="">
-                    </a>
-                </div>
-                <div class="span6">
-                    <p>
-                        Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque, ad nobis propriae quaerendum sea.
-                    </p>
-                    <p><a href="#">Read more</a></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span8">
-                    <p></p>
-                    <p>
-                        <i class="icon-user"></i> by <a href="#">Mark</a>
-                        | <i class="icon-calendar"></i> Sept 16th, 2012
-                        | <i class="icon-comment"></i> <a href="#">3 Comments</a>
-                        | <i class="icon-share"></i> <a href="#">39 Shares</a>
-                        | <i class="icon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
-                        <a href="#"><span class="label label-info">Bootstrap</span></a>
-                        <a href="#"><span class="label label-info">UI</span></a>
-                        <a href="#"><span class="label label-info">growth</span></a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-</div>
+
+
+

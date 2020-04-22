@@ -55,6 +55,28 @@ namespace Wod.Services.PostService
             return model;
         }
 
+        public IEnumerable<PostVIewModel> GetAll()
+        {
+            var allPost = this.postsRepo.Get();
+            var posts = new List<PostVIewModel>();
+            foreach (var post in allPost)
+            {
+                posts.Add(new PostVIewModel
+                {
+                    Id=post.Id,
+                    CategoryName = post.Category.Name,
+                    CreatedOn = post.CreatedOn,
+                    UserUsernameName = post.User.UserName,
+                    Comments = post.Comments,
+                    PictureUrl = post.PictureUrl,
+                    Tittle = post.Tittle
+                });
+            }
+           
+
+            return posts;
+        }
+
         public async Task<int> GreateAsyns(string title, int categoryId, string userId, DateTime date, string PictureUrl)
         {
 

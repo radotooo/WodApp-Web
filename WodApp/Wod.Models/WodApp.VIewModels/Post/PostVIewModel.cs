@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Wod.Models.WodApp.VIewModels.Post
 {
-    public class PostVIewModel
+    public class PostVIewModel 
     {
-        
-       
+
+        public int Id { get; set; }
         public string UserUsernameName { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public DateTime CreatedOn { get; set; }

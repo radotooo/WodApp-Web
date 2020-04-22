@@ -2211,6 +2211,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "AutoMapper": "9.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.1",
           "Microsoft.EntityFrameworkCore": "3.1.1",
           "Microsoft.EntityFrameworkCore.Proxies": "3.1.1",
@@ -7490,7 +7491,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "AutoMapper >= 9.0.0",
       "CloudinaryDotNet >= 1.10.0",
       "Microsoft.AspNetCore.Identity.UI >= 3.1.1",
       "SendGrid >= 9.13.2",
@@ -7546,10 +7546,6 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
-          "AutoMapper": {
-            "target": "Package",
-            "version": "[9.0.0, )"
-          },
           "CloudinaryDotNet": {
             "target": "Package",
             "version": "[1.10.0, )"

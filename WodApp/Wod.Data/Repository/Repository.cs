@@ -79,7 +79,7 @@
 
        
         public IEnumerable<T> Get()
-            => this.dbContext
+            =>  this.dbContext
                 .Set<T>()
                 .AsEnumerable<T>();
                 

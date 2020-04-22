@@ -12,5 +12,6 @@ namespace Wod.Services.PostService.Contracts
         Task<int> GreateAsyns(string title, int categoryId, string userId, DateTime date, string PictureUrl);
 
         PostVIewModel Get(int Id);
+        IEnumerable<PostVIewModel> GetAll();
     }
 }

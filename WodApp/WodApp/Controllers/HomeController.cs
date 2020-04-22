@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Wod.Data;
 using Wod.Models.WodApp.VIewModels;
+using Wod.Models.WodApp.VIewModels.Post;
 using Wod.Services.Claudinary.Contracts;
+using Wod.Services.PostService.Contracts;
 using WodApp.Data.Domain;
 using WodApp.Models;
 using WodApp.Services.Test;
@@ -23,22 +25,27 @@ namespace WodApp.Controllers
         private readonly IHomeService homeService;
         private readonly SignInManager<ApplicationUser> appUser;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IPostService postService;
 
-        public HomeController(ILogger<HomeController> logger, IHomeService homeService, SignInManager<ApplicationUser> appUser, ICloudinaryService cloudinaryService)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService, SignInManager<ApplicationUser> appUser, 
+            ICloudinaryService cloudinaryService,IPostService postService)
         {
             _logger = logger;
             this.homeService = homeService;
             this.appUser = appUser;
             this.cloudinaryService = cloudinaryService;
+            this.postService = postService;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-
-
-
-            return View();
+            var model = new IndexPostViewModel
+            {
+                Posts = postService.GetAll()
+        };
+           
+            return View(model);
         }
         [AllowAnonymous]
         public IActionResult Privacy()
