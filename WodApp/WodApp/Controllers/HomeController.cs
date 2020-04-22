@@ -18,7 +18,7 @@ using WodApp.Services.Test;
 
 namespace WodApp.Controllers
 {
-  
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -27,8 +27,8 @@ namespace WodApp.Controllers
         private readonly ICloudinaryService cloudinaryService;
         private readonly IPostService postService;
 
-        public HomeController(ILogger<HomeController> logger, IHomeService homeService, SignInManager<ApplicationUser> appUser, 
-            ICloudinaryService cloudinaryService,IPostService postService)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService, SignInManager<ApplicationUser> appUser,
+            ICloudinaryService cloudinaryService, IPostService postService)
         {
             _logger = logger;
             this.homeService = homeService;
@@ -43,8 +43,8 @@ namespace WodApp.Controllers
             var model = new IndexPostViewModel
             {
                 Posts = postService.GetAll()
-        };
-           
+            };
+
             return View(model);
         }
         [AllowAnonymous]
@@ -64,8 +64,8 @@ namespace WodApp.Controllers
             return View();
         }
 
-      
-  
+
+
 
         [HttpPost]
         public async Task<IActionResult> Add(CreateMovementInputModel model)
@@ -80,7 +80,7 @@ namespace WodApp.Controllers
             model.Name = coverUrl;
             await this.homeService.GreateAsyns(model);
 
-            return View("Bravo",model);
+            return View("Bravo", model);
         }
 
         public async Task<IActionResult> SingOut(string returnUrl = null)
@@ -108,7 +108,7 @@ namespace WodApp.Controllers
         public IActionResult Test2()
         {
 
-           
+
             return View();
         }
     }

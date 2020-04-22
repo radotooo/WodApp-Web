@@ -16,5 +16,6 @@ namespace Wod.Models.WodApp.VIewModels.Post
         public string CategoryName { get; set; }
         public string PictureUrl { get; set; }
         public string Tittle { get; set; }
+        public int VoteCount { get; set; }
     }
 }

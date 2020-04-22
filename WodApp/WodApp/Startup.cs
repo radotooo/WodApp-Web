@@ -32,6 +32,10 @@ using Wod.Services.CategoryService.Contracts;
 using Wod.Services.CategoryService;
 using Wod.Services.CommentService.Contracts;
 using Wod.Services.CommentService;
+using Wod.Services.VoteService.Contracts;
+using Wod.Services.VoteService;
+
+
 
 namespace WodApp
 {
@@ -89,6 +93,10 @@ namespace WodApp
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IVoteSysService, VoteSysService>();
+
+
+
 
 
 
@@ -143,7 +151,9 @@ namespace WodApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("posts", "{controller=Post}/{action=ShowPost}/{id}");
+                endpoints.MapControllerRoute("Posts", "{controller=Post}/{action=ShowPost}/{id}");
+                //endpoints.MapControllerRoute("Category", "{controller=Category}/{action=Index}/");
+               
                 endpoints.MapRazorPages();
             });
         }

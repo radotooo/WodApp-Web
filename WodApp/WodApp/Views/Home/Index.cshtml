@@ -16,11 +16,11 @@
     {
 
         <div class="container">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 <div class="span8 ">
                     <div class="row d-flex justify-content-center">
                         <div class="span8">
-                            <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id" >@post.Tittle</a></strong></h4>
+                            <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.CategoryName" >@post.Tittle</a></strong></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -31,7 +31,7 @@
 
 
                     </div>
-                    <div class="row">
+                    <div class="row d-flex justify-content-center" >
                         <div class="span8">
                             <p></p>
                             <p>
@@ -39,12 +39,10 @@
                                 | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MMMM dd yyyy")
                                 | <i class="fa fa-comment"></i> <a href="#">Comments @post.Comments.Count()</a>
                                 | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
-                                | <i class="fas fa-tags"></i> Tags : <a href="#"><span class="label label-info">@post.CategoryName</span></a>
+                                | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category"  asp-route-category="@post.CategoryName" ><span class="label label-info">@post.CategoryName</span></a>
                                 <i class="fas fa-thumbs-up" style="color:Highlight"></i>
-                                <i class="fas fa-thumbs-down" style="color:Highlight"></i>
-                                @*<a href="#"><span class="label label-info">Bootstrap</span></a>
-                                    <a href="#"><span class="label label-info">UI</span></a>
-                                    <a href="#"><span class="label label-info">growth</span></a>*@
+                                <i class="fas fa-thumbs-down" style="color:Highlight"></i> <span id="votesCount">@post.VoteCount</span> points
+                           
                             </p>
                         </div>
                     </div>

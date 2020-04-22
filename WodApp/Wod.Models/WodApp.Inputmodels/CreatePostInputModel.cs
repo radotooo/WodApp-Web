@@ -15,13 +15,14 @@ namespace Wod.Models.WodApp.Inputmodels
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
         [AllowedExtensions(new string[] { ".jpg", ".png" })]
-        [Display(Name = "Change Avatar")]
+        
         public IFormFile PictureUrl { get; set; }
        [Required]
        [MaxLength(ModelValidation.NameMaxLength)]
         public string Tittle { get; set; }
 
         [Required]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         public IEnumerable<CategoryDropDownViewModel> Categoryes { get; set; }

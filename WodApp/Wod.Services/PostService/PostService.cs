@@ -15,6 +15,8 @@ using System.Linq;
 using WodApp.Data;
 using Microsoft.EntityFrameworkCore;
 
+using Wod.Services.VoteService.Contracts;
+
 namespace Wod.Services.PostService
 {
     public class PostService : IPostService
@@ -24,13 +26,15 @@ namespace Wod.Services.PostService
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ApplicationDbContext dbContext;
+        private readonly IVoteSysService voteSysService;
 
-        public PostService(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager,ApplicationDbContext dbContext)
+        public PostService(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager,ApplicationDbContext dbContext ,IVoteSysService voteSysService)
         {
             this.postsRepo = postsRepo;
 
             this.userManager = userManager;
             this.dbContext = dbContext;
+            this.voteSysService = voteSysService;
         }
 
         public PostVIewModel Get(int Id)
@@ -48,7 +52,9 @@ namespace Wod.Services.PostService
                 Tittle = currentPost.Tittle,
                 UserId = currentPost.UserId,
                 Id=currentPost.Id,
-                UserAvatarUrl = currentPost.User.AvatarUrl
+                UserAvatarUrl = currentPost.User.AvatarUrl,
+                
+
 
             };
 
@@ -72,12 +78,37 @@ namespace Wod.Services.PostService
                     UserUsernameName = post.User.UserName,
                     Comments = post.Comments,
                     PictureUrl = post.PictureUrl,
-                    Tittle = post.Tittle
+                    Tittle = post.Tittle,
+                    VoteCount = voteSysService.GetVoteCount(post.Id)
                 });
             }
            
 
             return posts;
+        }
+
+        public  IEnumerable<PostVIewModel> GetAllPostFromCategory(string name)
+        {
+            var allPost = this.postsRepo.All().Where(x => x.Category.Name == name).ToList();
+            var posts = new List<PostVIewModel>();
+            foreach (var post in allPost)
+            {
+                posts.Add(new PostVIewModel
+                {
+                    Id = post.Id,
+                    CategoryName = post.Category.Name,
+                    CreatedOn = post.CreatedOn,
+                    UserUsernameName = post.User.UserName,
+                    Comments = post.Comments,
+                    PictureUrl = post.PictureUrl,
+                    Tittle = post.Tittle,
+                    VoteCount = voteSysService.GetVoteCount(post.Id)
+                });
+            }
+
+
+            return posts;
+
         }
 
         public async Task<int> GreateAsyns(string title, int categoryId, string userId, DateTime date, string PictureUrl)

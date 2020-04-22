@@ -13,5 +13,7 @@ namespace Wod.Services.PostService.Contracts
 
         PostVIewModel Get(int Id);
         IEnumerable<PostVIewModel> GetAll();
+        IEnumerable<PostVIewModel> GetAllPostFromCategory(string name);
+
     }
 }

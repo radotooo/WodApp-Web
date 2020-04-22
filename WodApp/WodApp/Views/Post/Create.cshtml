@@ -1,6 +1,6 @@
 ﻿
 @model Wod.Models.WodApp.Inputmodels.CreatePostInputModel
-@{ 
+@{
     var categories = Model.Categoryes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
 
@@ -11,7 +11,7 @@
                 <label>Preview:</label>
                 <div><img id="thumbnil" style="width:20%; margin-top:10px;" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="image" /></div>
                 <input asp-for="PictureUrl" type="file" accept="image/*" onchange="showMyImage(this)" />
-                <span asp-validation-for="PictureUrl"class="text-danger"></span>
+                <span asp-validation-for="PictureUrl" class="text-danger"></span>
 
                 <br />
             </div>
@@ -23,8 +23,9 @@
 
             <div class="form-group col-md-6">
                 <label asp-for="CategoryId"></label>
-                <select asp-for="CategoryId" asp-items="categories" class="form-control "></select>
+                <select asp-for="CategoryId" asp-items="categories" class="form-control "><option selected="" disabled="disabled">Choose Category</option>  </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
+
             </div>
 
             <hr />
@@ -32,8 +33,8 @@
         </form>
     </div>
 </div>
-                   
-                
+
+
 
 @*<script>
         $('#myModal').on('shown.bs.modal', function () {
@@ -66,3 +67,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -11,6 +11,7 @@ using Wod.Services.CategoryService.Contracts;
 using Wod.Services.Claudinary;
 using Wod.Services.Claudinary.Contracts;
 using Wod.Services.PostService.Contracts;
+using Wod.Services.VoteService.Contracts;
 
 namespace WodApp.Controllers
 {
@@ -21,14 +22,16 @@ namespace WodApp.Controllers
         private readonly ICloudinaryService cloudinaryService;
         private readonly ICategoryService categoryService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IVoteSysService voteSysService;
 
         public PostController(IPostService postService , ICloudinaryService cloudinaryService,
-            ICategoryService categoryService, UserManager<ApplicationUser> userManager)
+            ICategoryService categoryService, UserManager<ApplicationUser> userManager,IVoteSysService voteSysService)
         {
             this.postService = postService;
             this.cloudinaryService = cloudinaryService;
             this.categoryService = categoryService;
             this.userManager = userManager;
+            this.voteSysService = voteSysService;
         }
         public IActionResult Index()
         {
@@ -39,7 +42,7 @@ namespace WodApp.Controllers
         public IActionResult ShowPost(int id)
         {
             var model = postService.Get(id);
-
+            model.VoteCount = voteSysService.GetVoteCount(model.Id);
             return View(model);
         }
 
@@ -61,7 +64,8 @@ namespace WodApp.Controllers
             var categories = this.categoryService.GetAll();
             model.Categoryes = categories;
             
-           
+
+
             var user = await this.userManager.GetUserAsync(this.User);
             if (!ModelState.IsValid)
             {
