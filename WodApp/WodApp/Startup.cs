@@ -30,7 +30,8 @@ using Wod.Services.PostService.Contracts;
 using Wod.Services.PostService;
 using Wod.Services.CategoryService.Contracts;
 using Wod.Services.CategoryService;
-
+using Wod.Services.CommentService.Contracts;
+using Wod.Services.CommentService;
 
 namespace WodApp
 {
@@ -87,6 +88,8 @@ namespace WodApp
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ICommentService, CommentService>();
+
 
 
 

@@ -45,7 +45,10 @@ namespace Wod.Services.PostService
                 UserUsernameName = currentPost.User.UserName,
                 Comments = currentPost.Comments,
                 PictureUrl = currentPost.PictureUrl,
-                Tittle = currentPost.Tittle
+                Tittle = currentPost.Tittle,
+                UserId = currentPost.UserId,
+                Id=currentPost.Id,
+                UserAvatarUrl = currentPost.User.AvatarUrl
 
             };
 

@@ -11,7 +11,7 @@ namespace Wod.Models.WodApp.Inputmodels
 {
     public class CreatePostInputModel
     {
-       [Required(ErrorMessage ="Test")]
+       [Required]
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
         [AllowedExtensions(new string[] { ".jpg", ".png" })]
@@ -21,7 +21,7 @@ namespace Wod.Models.WodApp.Inputmodels
        [MaxLength(ModelValidation.NameMaxLength)]
         public string Tittle { get; set; }
 
-        [Required(ErrorMessage ="TEst")]
+        [Required]
         public int CategoryId { get; set; }
 
         public IEnumerable<CategoryDropDownViewModel> Categoryes { get; set; }

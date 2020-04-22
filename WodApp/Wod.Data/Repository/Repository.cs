@@ -29,10 +29,10 @@
             await this.dbContext
                 .Set<T>()
                 .AddAsync(entity);
-                
-
             await this.dbContext.SaveChangesAsync();
         }
+                
+
 
         public async Task AddRangeAsync(IEnumerable<T> entity)
         {
