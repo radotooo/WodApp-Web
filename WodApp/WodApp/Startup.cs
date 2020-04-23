@@ -34,8 +34,8 @@ using Wod.Services.CommentService.Contracts;
 using Wod.Services.CommentService;
 using Wod.Services.VoteService.Contracts;
 using Wod.Services.VoteService;
-
-
+using Wod.Services.FavoriteService.Contracts;
+using Wod.Services.FavoriteService;
 
 namespace WodApp
 {
@@ -94,6 +94,8 @@ namespace WodApp
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IVoteSysService, VoteSysService>();
+            services.AddTransient<IFavoriteService, FavoriteService>();
+
 
 
 

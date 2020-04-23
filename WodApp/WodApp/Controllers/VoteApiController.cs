@@ -25,7 +25,7 @@ namespace WodApp.Controllers
             this.voteSysService = voteSysService;
             this.appUser = appUser;
         }
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<VoteViewModel>> Vote(VoteInputModel input)
             {
