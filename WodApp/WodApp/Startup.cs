@@ -151,9 +151,9 @@ namespace WodApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("Posts", "{controller=Post}/{action=ShowPost}/{id}");
-                //endpoints.MapControllerRoute("Category", "{controller=Category}/{action=Index}/");
-               
+                endpoints.MapControllerRoute("Posts", "{controller=Post}/{action=ShowPost}/{id?}");
+                endpoints.MapControllerRoute("Category", "{controller=Post}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

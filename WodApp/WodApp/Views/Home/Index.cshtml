@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    string voteId = string.Empty;
 
 }
 
@@ -11,49 +12,142 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
 
-@{
-    foreach (var post in Model.Posts)
-    {
 
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="span8 ">
+
+<h4>OrderBy:</h4>
+
+    <button id="sortCreate" class="btn btn-secondary active">Fresh</button>
+    <button id="sortLike" class="btn btn-secondary disabled">Hot</button>
+
+   
+
+
+
+
+
+    <div id="CreatedOn">
+        @{
+            foreach (var post in Model.Posts.OrderByDescending(x => x.CreatedOn))
+            {
+
+                <div class="container" id"normal">
                     <div class="row d-flex justify-content-center">
-                        <div class="span8">
-                            <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.CategoryName" >@post.Tittle</a></strong></h4>
-                        </div>
-                    </div>
-                    <div class="row">
+                        <div class="span8 ">
+                            <div class="row d-flex justify-content-center">
+                                <div class="span8">
+                                    <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">@post.Tittle</a></strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
 
-                        <div style="text-align: center;">
-                            <img src="@post.PictureUrl" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
-                        </div>
+                                <div style="text-align: center;">
+                                    <img src="@post.PictureUrl" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
+                                </div>
 
 
-                    </div>
-                    <div class="row d-flex justify-content-center" >
-                        <div class="span8">
-                            <p></p>
-                            <p>
-                                <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
-                                | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MMMM dd yyyy")
-                                | <i class="fa fa-comment"></i> <a href="#">Comments @post.Comments.Count()</a>
-                                | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
-                                | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category"  asp-route-category="@post.CategoryName" ><span class="label label-info">@post.CategoryName</span></a>
-                                <i class="fas fa-thumbs-up" style="color:Highlight"></i>
-                                <i class="fas fa-thumbs-down" style="color:Highlight"></i> <span id="votesCount">@post.VoteCount</span> points
-                           
-                            </p>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="span8">
+                                    <p></p>
+                                    <p>
+                                        <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
+                                        | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
+                                        | <i class="fa fa-comment"></i> <a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Comments @post.Comments.Count()</a>
+                                        | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
+                                        | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category" asp-route-category="@post.CategoryName"><span class="label label-info">@post.CategoryName</span></a>
+                                        @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id, true)"> <button id=" class="fas fa-arrow-up" style="color:darkgrey"></button>  </a>*@
+                                        @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id,false)">  <i class="fas fa-thumbs-down active" style="color:darkgrey"></i></a>*@ <span>@post.VoteCount</span> points
+
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <hr />
-    }
-}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+                <hr />
+            }
+        }
+    </div>
+    <div id="Likes">
+        @{
+            foreach (var post in Model.Posts.OrderByDescending(x => x.VoteCount))
+            {
+
+                <div class="container" id"normal">
+                    <div class="row d-flex justify-content-center">
+                        <div class="span8 ">
+                            <div class="row d-flex justify-content-center">
+                                <div class="span8">
+                                    <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">@post.Tittle</a></strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div style="text-align: center;">
+                                    <img src="@post.PictureUrl" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
+                                </div>
+
+
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="span8">
+                                    <p></p>
+                                    <p>
+                                        <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
+                                        | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
+                                        | <i class="fa fa-comment"></i> <a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Comments @post.Comments.Count()</a>
+                                        | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
+                                        | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category" asp-route-category="@post.CategoryName"><span class="label label-info">@post.CategoryName</span></a>
+                                        @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id, true)"> <button id=" class="fas fa-arrow-up" style="color:darkgrey"></button>  </a>*@
+                                        @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id,false)">  <i class="fas fa-thumbs-down active" style="color:darkgrey"></i></a>*@ <span>@post.VoteCount</span> points
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            }
+        }
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active">
+                    <span class="page-link">
+                        2
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <script>
+        $("#sortLike").click(function () {
+
+            $("#Likes").show();
+            $("#sortLike").removeClass('disabled').addClass('active');
+            $("#CreatedOn").hide();
+                $("#sortCreate").removeClass('active').addClass('disabled');
+        });
+        $("#sortCreate").click(function () {
+
+            $("#CreatedOn").show();
+            $("#sortCreate").removeClass('disabled').addClass('active');
+            $("#Likes").hide();
+               $("#sortLike").removeClass('active').addClass('disabled');
+        });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
 
 

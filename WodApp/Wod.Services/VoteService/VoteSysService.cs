@@ -41,7 +41,7 @@ namespace Wod.Services.VoteService
 
         public int GetVoteCount(int postId)
         {
-           var result = repository.Get().Where(x => x.Id == postId);
+           var result = repository.Get().Where(x => x.PostId == postId);
             return result.Sum(x => (int)x.Value);
         }
     }

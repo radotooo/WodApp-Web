@@ -164,6 +164,8 @@
     }
 </style>
 
+
+
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="span8 ">
@@ -190,10 +192,10 @@
                         | <i class="fa fa-calendar" style="color:Highlight"></i> @Model.CreatedOn.ToString("MMMM dd yyyy")
                         | <i class="fa fa-comment"></i> <a href="#">@Model.Comments.Count()</a>
                         | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
-                        | <i class="fas fa-tags"></i> Tags : <a href="#"><span class="label label-info">@Model.CategoryName</span></a>
+                        | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category" asp-action="Index" asp-route-category="@Model.CategoryName"><span class="label label-info">@Model.CategoryName</span></a>
                         <a href="javascript:void(0);" id="vote" onclick="vote(@Model.Id, true)">  <i class="fas fa-thumbs-up active" style="color:darkgrey"></i></a>
                         <a href="javascript:void(0);" id="vote" onclick="vote(@Model.Id,false)">  <i class="fas fa-thumbs-down active" style="color:darkgrey"></i></a> <span id="votesCount">@Model.VoteCount</span> points
-                        
+
                     </p>
                 </div>
             </div>
@@ -300,18 +302,17 @@
 </div>
 
 <script>
-   $("#vote").click(function(e)
-{
-    // Special stuff to do when this link is clicked...
+    $("#vote").click(function (e) {
+        // Special stuff to do when this link is clicked...
 
-    // Cancel the default action
-    e.preventDefault();
-});
+        // Cancel the default action
+        e.preventDefault();
+    });
 </script>
 
 <script>
     function vote(postId, VoteType) {
-       var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+        var token = $("#votesForm input[name=__RequestVerificationToken]").val();
 
         var json = { postId: postId, VoteType: VoteType };
 
@@ -326,7 +327,7 @@
                 $("#votesCount").html(data.count);
             }
         });
-       
+
     };
 </script>
 
