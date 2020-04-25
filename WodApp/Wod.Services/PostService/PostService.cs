@@ -16,6 +16,7 @@ using WodApp.Data;
 using Microsoft.EntityFrameworkCore;
 
 using Wod.Services.VoteService.Contracts;
+using Wod.Data.Models;
 
 namespace Wod.Services.PostService
 {
@@ -37,11 +38,12 @@ namespace Wod.Services.PostService
             this.voteSysService = voteSysService;
         }
 
-        public PostVIewModel Get(int Id)
+        public async Task<PostVIewModel> GetAsync(int Id)
         {
-           // var postWithDb = dbContext.Posts.Where(x => x.Id == Id).Include(c => c.Category.Name).Include(b => b.User.UserName).ToList();
-            
-            var currentPost = postsRepo.All().Where(x => x.Id == Id).FirstOrDefault();
+            // var postWithDb = dbContext.Posts.Where(x => x.Id == Id).Include(c => c.Category.Name).Include(b => b.User.UserName).ToList();
+
+            var currentPost = await postsRepo.FindByIdAsync(Id);
+
             var model = new PostVIewModel
             {
                 CategoryName = currentPost.Category.Name,
@@ -86,7 +88,7 @@ namespace Wod.Services.PostService
 
             return posts;
         }
-
+        //Todo Refactor(Remove) thiss!!!
         public  IEnumerable<PostVIewModel> GetAllPostFromCategory(string name)
         {
             var allPost = this.postsRepo.All().Where(x => x.Category.Name == name).ToList();
@@ -128,5 +130,33 @@ namespace Wod.Services.PostService
             return post.Id;
         }
 
+        public async Task<IndexPostViewModel> GetAll(IEnumerable<Favorite> favorites)
+        {
+            var favoritePostsIds = new List<Post>();
+          
+            foreach (var postId in favorites)
+            {
+                favoritePostsIds.Add(await this.postsRepo.FindByIdAsync(postId.PostId));
+        
+            }
+            var postView = new List<PostVIewModel>();
+
+            foreach (var post in favoritePostsIds)
+            {
+                postView.Add(new PostVIewModel
+                {
+                    Id = post.Id,
+                    CategoryName = post.Category.Name,
+                    CreatedOn = post.CreatedOn,
+                    UserUsernameName = post.User.UserName,
+                    Comments = post.Comments,
+                    PictureUrl = post.PictureUrl,
+                    Tittle = post.Tittle,
+                    VoteCount = voteSysService.GetVoteCount(post.Id)
+                });
+            }
+           
+            return new IndexPostViewModel {Posts=postView };
+        }
     }
 }

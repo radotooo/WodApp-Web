@@ -20,7 +20,7 @@
         public Repository(ApplicationDbContext dbContext)
         {
            
-            this.dbContext = dbContext;
+            this.dbContext = dbContext; 
         }
 
        
@@ -50,6 +50,7 @@
             => await this.dbContext
                 .Set<T>()
                 .FindAsync(id);
+            
                 
 
        
@@ -76,15 +77,17 @@
                 this.dbContext.SaveChangesAsync();
             }
         }
+        
 
-       
+
+
         public IEnumerable<T> Get()
             =>  this.dbContext
                 .Set<T>()
                 .AsEnumerable<T>();
-                
 
-       
+      
+
         public IEnumerable<T> Get(Expression<Func<T, bool>> predicate) 
             => this.dbContext
                 .Set<T>()
@@ -125,6 +128,16 @@
             {
                 this.dbContext?.Dispose();
             }
+        }
+
+        public async Task RemoveAsync(T entity)
+        {
+            this.dbContext
+                   .Set<T>()
+                   .Remove(entity);
+
+
+           await this.dbContext.SaveChangesAsync();
         }
     }
 }

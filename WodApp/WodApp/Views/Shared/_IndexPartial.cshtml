@@ -93,7 +93,7 @@
                                     <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
                                     | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
                                     | <i class="fa fa-comment"></i> <a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Comments @post.Comments.Count()</a>
-                                    | <i class="fas fa-share"></i> <a href="javascript:void(0);" onclick="vote(@post.Id,'@ViewData["userId"]',@post.Tittle,'@post.Tittle')">Add to Favorites</a>
+                                    | <i class="fas fa-share"></i> <a href="javascript:void(0);" onclick="vote(@post.Id,'@ViewData["userId"]','@post.Tittle')">Add to Favorites</a>
                                     | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category" asp-route-category="@post.CategoryName"><span class="label label-info">@post.CategoryName</span></a>
                                     @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id, true)"> <button id=" class="fas fa-arrow-up" style="color:darkgrey"></button>  </a>*@
                                     @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id,false)">  <i class="fas fa-thumbs-down active" style="color:darkgrey"></i></a>*@ <span>@post.VoteCount</span> points

@@ -11,7 +11,8 @@ using Wod.Services.FavoriteService.Contracts;
 
 namespace WodApp.Controllers
 {
-    [Route("api/Favorite")]
+    [Authorize]
+    [Route("api/[action]")]
     [ApiController]
     public class FavoriteApiController : ControllerBase
     {
@@ -26,9 +27,18 @@ namespace WodApp.Controllers
         public async Task<ActionResult<FavoriteApiViewModel>> Favorite(FavoriteApiInputModel input)
         {
 
-          var result =   await favoriteService.Create(input.PostId, input.UserId,input.Tittle);
+            var result = await favoriteService.Create(input.PostId, input.UserId, input.Tittle);
 
-            return new FavoriteApiViewModel { Message = result }; 
+            return new FavoriteApiViewModel { Message = result };
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromQuery]string userId, int postId, string tittle)
+        {
+            var result = await this.favoriteService.Delete(userId, postId, tittle);
+            //var result = await favoriteService.Create(input.PostId, input.UserId, input.Tittle);
+
+            return Ok(new FavoriteApiViewModel { Message = result, PostId = postId.ToString() });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Wod.Models.WodApp.VIewModels.Post;
@@ -30,6 +31,8 @@ namespace WodApp.Controllers
             {
                 post.VoteCount = voteSysService.GetVoteCount(post.Id);
             }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewData["userId"] = userId;
             return View(model);
         }
     }

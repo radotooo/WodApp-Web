@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Wod.Data.ApplicationUser> userManager
+@model Wod.Models.WodApp.VIewModels.Post.IndexPostViewModel
+
+
+@{
+    ViewData["Title"] = "Home Page";
+
+
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
+
+
+
+
+
+
+
+<div>
+    @{
+        foreach (var post in Model.Posts)
+        {
+
+        <div class="container" id="@post.Id.ToString()">
+            <div class="row d-flex justify-content-center">
+                <div class="span8 ">
+                    <div class="row d-flex justify-content-center">
+                        <div class="span8">
+                            <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">@post.Tittle</a></strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div style="text-align: center;">
+                            <img src="@post.PictureUrl" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
+                        </div>
+
+                        <form id="votesForm" method="post"></form>
+
+                    </div>
+                    <form id="token" hidden></form>
+                    <div class="row d-flex justify-content-center">
+                        <div class="span8">
+                            <p></p>
+                            <p>
+                                <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
+                                | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
+                                | <i class="fa fa-comment"></i> <a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Comments @post.Comments.Count()</a>
+                                | <i class="fas fa-plus"></i> <a href="javascript:void(0);" @*asp-controller="Home" asp-action="Remove"*@ onclick="remove('@userManager.GetUserId(User)', @post.Id,'@post.Tittle')">Remove </a>
+                                | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category" asp-route-category="@post.CategoryName"><span class="label label-info">@post.CategoryName</span></a>
+                                @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id, true)"> <button id=" class="fas fa-arrow-up" style="color:darkgrey"></button>  </a>*@
+                                @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id,false)">  <i class="fas fa-thumbs-down active" style="color:darkgrey"></i></a>*@ <span>@post.VoteCount</span> points
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+            
+        }
+    }
+</div>
+<script>
+    function remove(userId, postId,tittle) {
+        console.log(`stanaaaaa ${postId}, ${userId}`)
+
+        var token = $("#token input[name=__RequestVerificationToken]").val();
+
+        //var json = { postId: postId, userId: userId, tittle: name };
+
+        $.ajax({
+            url: `/api/Delete?userId=${userId}&postId=${postId}&tittle=${tittle}`,
+            type: "DELETE",
+            //data: JSON.stringify(json),
+            //contentType: "application/json; charset=utf-8",
+            //dataType: "json",
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (data) {
+            
+                $('#' + data.postId).hide();
+
+                    alert(data.message);
+               
+            }
+        });
+
+    };
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
+
+
+
+

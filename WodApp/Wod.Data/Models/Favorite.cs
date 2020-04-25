@@ -15,5 +15,6 @@ namespace Wod.Data.Models
         public virtual ApplicationUser User { get; set; }
         public int PostId { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public DateTime AddetOn { get; set; }
     }
 }

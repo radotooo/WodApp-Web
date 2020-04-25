@@ -12,6 +12,7 @@ using Wod.Data;
 using Wod.Models.WodApp.VIewModels;
 using Wod.Models.WodApp.VIewModels.Post;
 using Wod.Services.Claudinary.Contracts;
+using Wod.Services.FavoriteService.Contracts;
 using Wod.Services.PostService.Contracts;
 using Wod.Services.VoteService;
 using Wod.Services.VoteService.Contracts;
@@ -30,9 +31,10 @@ namespace WodApp.Controllers
         private readonly ICloudinaryService cloudinaryService;
         private readonly IPostService postService;
         private readonly IVoteSysService voteSysService;
+        private readonly IFavoriteService favoriteService;
 
         public HomeController(ILogger<HomeController> logger, IHomeService homeService, SignInManager<ApplicationUser> appUser,
-            ICloudinaryService cloudinaryService, IPostService postService, IVoteSysService voteSysService)
+            ICloudinaryService cloudinaryService, IPostService postService, IVoteSysService voteSysService,IFavoriteService favoriteService)
         {
             _logger = logger;
             this.homeService = homeService;
@@ -40,6 +42,7 @@ namespace WodApp.Controllers
             this.cloudinaryService = cloudinaryService;
             this.postService = postService;
             this.voteSysService = voteSysService;
+            this.favoriteService = favoriteService;
         }
 
         [Authorize]
@@ -49,9 +52,10 @@ namespace WodApp.Controllers
             {
                 Posts = postService.GetAll()
             };
+
             foreach (var post in model.Posts)
             {
-                post.VoteCount = voteSysService.GetVoteCount(post.Id);
+                post.VoteCount = this.voteSysService.GetVoteCount(post.Id);
             }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewData["userId"] = userId;
@@ -61,6 +65,7 @@ namespace WodApp.Controllers
         [AllowAnonymous]
         public IActionResult Privacy()
         {
+           
             return View();
         }
 
@@ -70,9 +75,17 @@ namespace WodApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Test()
+        public async Task<IActionResult> Favorite()
         {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var favorite =  this.favoriteService.GetAll(userId);
+            var model = await this.postService.GetAll(favorite);
+
+
+
+
+                return View(model);
+       
         }
 
 

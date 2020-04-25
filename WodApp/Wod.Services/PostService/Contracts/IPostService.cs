@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Wod.Data.Models;
 using Wod.Models.WodApp.Inputmodels;
 using Wod.Models.WodApp.VIewModels.Post;
 
@@ -11,8 +12,11 @@ namespace Wod.Services.PostService.Contracts
     {
         Task<int> GreateAsyns(string title, int categoryId, string userId, DateTime date, string PictureUrl);
 
-        PostVIewModel Get(int Id);
+        Task<PostVIewModel> GetAsync(int Id);
+        
         IEnumerable<PostVIewModel> GetAll();
+        Task<IndexPostViewModel> GetAll(IEnumerable<Favorite> favorites);
+
         IEnumerable<PostVIewModel> GetAllPostFromCategory(string name);
 
     }

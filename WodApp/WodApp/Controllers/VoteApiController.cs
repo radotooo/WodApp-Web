@@ -13,6 +13,7 @@ using Wod.Services.VoteService.Contracts;
 
 namespace WodApp.Controllers
 {
+    [Authorize]
     [Route("api/Vote")]
     [ApiController]
     public class VoteApiController : ControllerBase
@@ -25,7 +26,7 @@ namespace WodApp.Controllers
             this.voteSysService = voteSysService;
             this.appUser = appUser;
         }
-        [Authorize]
+        
         [HttpPost]
         public async Task<ActionResult<VoteViewModel>> Vote(VoteInputModel input)
             {

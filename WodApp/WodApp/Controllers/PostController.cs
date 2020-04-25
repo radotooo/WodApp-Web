@@ -39,9 +39,9 @@ namespace WodApp.Controllers
             return View();
         }
 
-        public IActionResult ShowPost(int id)
+        public async Task<IActionResult> ShowPost(int id)
         {
-            var model = postService.Get(id);
+            var model = await postService.GetAsync(id);
             model.VoteCount = voteSysService.GetVoteCount(model.Id);
             return View(model);
         }

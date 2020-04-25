@@ -31,6 +31,7 @@
 
         
         void Delete(T entity, int id);
+        Task RemoveAsync(T entity);
 
         void Update(T entity);
 
