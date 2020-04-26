@@ -14,7 +14,7 @@ namespace Wod.Models.WodApp.Inputmodels
        [Required]
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
-        [AllowedExtensions(new string[] { ".jpg", ".png" })]
+        [AllowedExtensions(new string[] { ".jpg", ".png" ,".jpeg"})]
         
         public IFormFile PictureUrl { get; set; }
        [Required]

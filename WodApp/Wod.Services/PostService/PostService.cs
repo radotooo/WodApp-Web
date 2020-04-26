@@ -25,24 +25,20 @@ namespace Wod.Services.PostService
     {
         private readonly IRepository<Post> postsRepo;
 
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly ApplicationDbContext dbContext;
         private readonly IVoteSysService voteSysService;
 
-        public PostService(IRepository<Post> postsRepo, UserManager<ApplicationUser> userManager,ApplicationDbContext dbContext ,IVoteSysService voteSysService)
+        public PostService(IRepository<Post> postsRepo, IVoteSysService voteSysService)
         {
             this.postsRepo = postsRepo;
 
-            this.userManager = userManager;
-            this.dbContext = dbContext;
+           
             this.voteSysService = voteSysService;
         }
 
         public async Task<PostVIewModel> GetAsync(int Id)
         {
-            // var postWithDb = dbContext.Posts.Where(x => x.Id == Id).Include(c => c.Category.Name).Include(b => b.User.UserName).ToList();
-
-            var currentPost = await postsRepo.FindByIdAsync(Id);
+           
+            var currentPost = await this.postsRepo.FindByIdAsync(Id);
 
             var model = new PostVIewModel
             {
@@ -55,13 +51,8 @@ namespace Wod.Services.PostService
                 UserId = currentPost.UserId,
                 Id=currentPost.Id,
                 UserAvatarUrl = currentPost.User.AvatarUrl,
-                
-
-
+             
             };
-
-
-
 
             return model;
         }
@@ -88,10 +79,10 @@ namespace Wod.Services.PostService
 
             return posts;
         }
-        //Todo Refactor(Remove) thiss!!!
+        
         public  IEnumerable<PostVIewModel> GetAllPostFromCategory(string name)
         {
-            var allPost = this.postsRepo.All().Where(x => x.Category.Name == name).ToList();
+            var allPost = this.postsRepo.All().Where(x => x.Category.Name == name);
             var posts = new List<PostVIewModel>();
             foreach (var post in allPost)
             {

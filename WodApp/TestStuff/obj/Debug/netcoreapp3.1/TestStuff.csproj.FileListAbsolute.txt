@@ -8,7 +8,7 @@ C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\TestStuff.pdb
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.csprojAssemblyReference.cache
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.csproj.CopyComplete
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.dll
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.pdb
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\TestStuff\obj\Debug\netcoreapp3.1\TestStuff.csprojAssemblyReference.cache

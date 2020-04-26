@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Wod.Models.WodApp.Inputmodels;
+using Wod.Models.WodApp.VIewModels.Post;
 using Wod.Services.CommentService.Contracts;
 
 namespace WodApp.Controllers
@@ -16,12 +17,13 @@ namespace WodApp.Controllers
         {
             this.commentService = commentService;
         }
+
         [HttpPost]
-        public IActionResult Create(CreateCommentInputModel input)
+        public IActionResult Create(PostVIewModel input)
         {
-           
-            commentService.Greate(input);
-            return this.RedirectToAction("ShowPost", "Post", new { Id = input.PostId });
+        
+            commentService.Greate(input.CommentModel);
+            return this.RedirectToAction("ShowPost", "Post", new { Id = input.CommentModel.PostId });
         }
     }
 }

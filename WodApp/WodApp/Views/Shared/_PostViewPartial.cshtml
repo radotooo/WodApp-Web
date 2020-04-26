@@ -1,0 +1,36 @@
+﻿@*partial view*@
+<div class="container" id"normal">
+    <div class="row d-flex justify-content-center">
+        <div class="span8 ">
+            <div class="row d-flex justify-content-center">
+                <div class="span8">
+                    <h4><strong><a asp-controller="Post" asp-action="ShowPost" asp-route-id="@Model.Id">@Model.Tittle</a></strong></h4>
+                </div>
+            </div>
+            <div class="row">
+
+                <div style="text-align: center;">
+                    <img src="@Model.PictureUrl" style="max-width: 50%; height: auto;" alt="FYI, image alt text is required" />
+                </div>
+
+                <form id="votesForm" method="post"></form>
+
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="span8">
+                    <p></p>
+                    <p>
+                        <i class="fa fa-user"></i> by <a href="#">@Model.UserUsernameName</a>
+                        | <i class="fa fa-calendar" style="color:Highlight"></i> @Model.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
+                        | <i class="fa fa-comment"></i> <a asp-controller="Post" asp-action="ShowPost" asp-route-id="@Model.Id">Comments @Model.Comments.Count()</a>
+                        | <i class="fas fa-plus"></i> <a href="javascript:void(0);" onclick="vote(@Model.Id,'@ViewData["userId"]','@Model.Tittle')">Add to Favorites </a>
+                        | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category" asp-route-category="@Model.CategoryName"><span class="label label-info">@Model.CategoryName</span></a>
+                        @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id, true)"> <button id=" class="fas fa-arrow-up" style="color:darkgrey"></button>  </a>*@
+                        @*<a href="javascript:void(0);" id="@voteId" onclick="vote(@post.Id,false)">  <i class="fas fa-thumbs-down active" style="color:darkgrey"></i></a>*@ <span>@Model.VoteCount</span> points
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

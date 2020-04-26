@@ -20,18 +20,16 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IRepository<ApplicationUser> appUser;
+
         private readonly ICloudinaryService cloudinaryService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IRepository<ApplicationUser> appUser,
-            ICloudinaryService cloudinaryService)
+                       ICloudinaryService cloudinaryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            this.appUser = appUser;
             this.cloudinaryService = cloudinaryService;
         }
 
@@ -62,7 +60,7 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
             public string Address { get; set; }
 
             //[Required(ErrorMessage = "Please select a file.")]
-            
+
             [DataType(DataType.Upload)]
             [MaxFileSize(5 * 1024 * 1024)]
             [AllowedExtensions(new string[] { ".jpg", ".png" })]
@@ -75,17 +73,17 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-           
-           
+
+
             Username = userName;
 
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-               FirstName = user.FirstName,
-               LastName=user.LastName,
-               Address=user.Address,
-               Photo=null
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                Photo = null
             };
         }
 
@@ -125,10 +123,10 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
-            if(Input.FirstName  != user.FirstName)
+            if (Input.FirstName != user.FirstName)
             {
                 user.FirstName = Input.FirstName;
-              var UpdateUserFirstName =   await _userManager.UpdateAsync(user);
+                var UpdateUserFirstName = await _userManager.UpdateAsync(user);
 
                 if (!UpdateUserFirstName.Succeeded)
                 {
@@ -136,10 +134,10 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting first name for user with ID '{userId}'.");
                 }
             }
-            if(Input.LastName != user.LastName)
+            if (Input.LastName != user.LastName)
             {
                 user.LastName = Input.LastName;
-               var UpdateUserLastName =  await _userManager.UpdateAsync(user);
+                var UpdateUserLastName = await _userManager.UpdateAsync(user);
                 if (!UpdateUserLastName.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -176,6 +174,6 @@ namespace WodApp.Areas.Identity.Pages.Account.Manage
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
-       
+
     }
 }

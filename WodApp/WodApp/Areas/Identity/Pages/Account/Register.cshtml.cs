@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Wod.Data;
+using Wod.Models;
 using Wod.Models.Common;
 
 namespace WodApp.Areas.Identity.Pages.Account
@@ -100,7 +101,8 @@ namespace WodApp.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     CreatedOn = DateTime.UtcNow,
                     FirstName = Input.FirstName,
-                    LastName = Input.LastName
+                    LastName = Input.LastName,
+                    AvatarUrl = GlobalConstants.DefaultUserImageUrl
 
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);

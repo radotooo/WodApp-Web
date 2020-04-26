@@ -27,14 +27,16 @@ namespace Wod.Services.CommentService
                 CreatedOn = DateTime.UtcNow,
                 Content = input.Content,
                 PostId = input.PostId,
-                UserId = input.UserId
+                UserId = input.UserId,
+                ParentId= input.ParentId
 
             };
-            //Give error with repository for some reason ...ToDO..
+           
+            await this.repository.AddAsync(comment);
             await this.dbContext.Comments.AddAsync(comment);
             this.dbContext.SaveChanges();
             //await this.repository.AddAsync(comment);
-           
+
         }
     }
 }

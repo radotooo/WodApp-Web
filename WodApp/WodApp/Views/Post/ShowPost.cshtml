@@ -1,8 +1,53 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
 @model Wod.Models.WodApp.VIewModels.Post.PostVIewModel
+@inject UserManager<Wod.Data.ApplicationUser> userManager
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Show Post";
+    async Task ShowNestedComments(int? parentId)
+    {
+        var comments = this.Model.Comments.Where(x => x.ParentId == parentId);
+
+        if (!comments.Any())
+        {
+            return;
+        }
+        @foreach (var comment in comments)
+        {
+            <div class="comment-box">
+                <span class="commenter-pic">
+                    <img src="@comment.User.AvatarUrl" class="img-fluid">
+                </span>
+                <span class="commenter-name">
+                    <a href="#">@comment.User.UserName</a> <span class="comment-time">@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</span>
+                </span>
+                <p class="comment-txt more">@comment.Content</p>
+                <div class="comment-meta">
+
+                    <button class="comment-reply reply-popup" onclick="test('@comment.Id')"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
+                </div>
+                <div class="comment-box add-comment reply-box" id="content+@comment.Id">
+                    <span class="commenter-pic">
+                        <img src="@userManager.GetUserAsync(User).Result.AvatarUrl" class="img-fluid">
+                    </span>
+                    <form id="form1" method="post" asp-controller="Comment" asp-action="Create" enctype="multipart/form-data">
+                        <input type="hidden" await asp-for="@Model.CommentModel.ParentId" value="@comment.Id" />
+                        <input type="hidden" asp-for="@Model.CommentModel.PostId" value="@Model.Id" />
+                        <input type="hidden" asp-for="@Model.CommentModel.UserId" value="@userManager.GetUserId(User)" />
+                        <span class="commenter-name">
+
+                            <input placeholder="Add a public reply" asp-for="@Model.CommentModel.Content" />
+                            <span asp-validation-for="@Model.CommentModel.Content" class="text-danger"></span>
+                            <button type="submit" class="btn btn-default">Reply</button>
+                            <button type="reset" class="btn btn-default reply-popup">Cancel</button>
+                        </span>
+                    </form>
+                </div>
+                @{ await ShowNestedComments(comment.Id); }
+
+            </div>
+        }
+    }
 }
 
 
@@ -10,6 +55,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
+
 <!------ Include the above in your HEAD tag ---------->
 <style>
     .comments-details button.btn.dropdown-toggle,
@@ -177,24 +223,21 @@
             <div class="row ">
 
                 <div style="text-align: center;">
-                    <img src="@Model.PictureUrl" style="max-width: 80%; height: auto;" alt="FYI, image alt text is required" />
+                    <img src="@Model.PictureUrl" style="max-width: 70%; height: auto;" alt="FYI, image alt text is required" />
                 </div>
-
 
             </div>
             <form id="votesForm" method="post"></form>
-            <div class="row">
-                <div class="span8">
+            <div class="row row d-flex justify-content-center">
+                <div class="span8 ">
                     <p></p>
                     <p>
-
                         <i class="fa fa-user"></i> by <a href="#">@Model.UserUsernameName</a>
                         | <i class="fa fa-calendar" style="color:Highlight"></i> @Model.CreatedOn.ToString("MMMM dd yyyy")
                         | <i class="fa fa-comment"></i> <a href="#">@Model.Comments.Count()</a>
-                        | <i class="fas fa-share"></i> <a href="#">39 Shares</a>
                         | <i class="fas fa-tags"></i> Tags : <a asp-controller="Category" asp-action="Index" asp-route-category="@Model.CategoryName"><span class="label label-info">@Model.CategoryName</span></a>
-                        <a href="javascript:void(0);" id="vote" onclick="vote(@Model.Id, true)">  <i class="fas fa-thumbs-up active" style="color:darkgrey"></i></a>
-                        <a href="javascript:void(0);" id="vote" onclick="vote(@Model.Id,false)">  <i class="fas fa-thumbs-down active" style="color:darkgrey"></i></a> <span id="votesCount">@Model.VoteCount</span> points
+                        <a href="javascript:void(0);" onclick="vote(@Model.Id, true)">  <i class="fas fa-thumbs-up active" id="thumbsUp" style="color:darkgrey"></i></a>
+                        <a href="javascript:void(0);" onclick="vote(@Model.Id,false)">  <i class="fas fa-thumbs-down active" id="thumbsDown" style="color:darkgrey"></i></a> <span id="votesCount">@Model.VoteCount</span> points
 
                     </p>
                 </div>
@@ -202,96 +245,48 @@
         </div>
     </div>
 
-
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="comments">
-                    <div class="comments-details">
-                        <span class="total-comments comments-sort">117 Comments</span>
-                        <span class="dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Sort By <span class="caret"></span></button>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Top Comments</a>
-                                <a href="#" class="dropdown-item">Newest First</a>
-                            </div>
-                        </span>
-                    </div>
 
-                    <div class="comment-box add-comment">
+                    <div class="comment-box add-comment" >
                         <form id="form1" method="post" asp-controller="Comment" asp-action="Create" enctype="multipart/form-data">
                             <span class="commenter-pic">
-                                <img src="@Model.UserAvatarUrl" class="img img-fluid">
+                                <img src="@userManager.GetUserAsync(User).Result.AvatarUrl" class="img img-fluid">
                             </span>
-                            <input type="hidden" name="PostId" value="@Model.Id" />
-                            <input type="hidden" name="UserId" value="@Model.UserId" />
+                            <input type="hidden" asp-for="@Model.CommentModel.ParentId" value="@null" />
+                            <input type="hidden" asp-for="@Model.CommentModel.PostId" value="@Model.Id" />
+                            <input type="hidden" asp-for="@Model.CommentModel.UserId" value="@userManager.GetUserId(User)" />
                             <span class="commenter-name">
-                                <input placeholder="Add a public comment" name="Content">
+                                <input placeholder="Add a public comment" asp-for="@Model.CommentModel.Content" />
+                                <span asp-validation-for="@Model.CommentModel.Content" class="text-danger"></span>
                                 <button type="submit" class="btn btn-default">Comment</button>
                                 <button type="reset" class="btn btn-default">Cancel</button>
                             </span>
                         </form>
                     </div>
-                    @{
-                        if (Model.Comments.Count > 0)
-                        {
-                            foreach (var comment in Model.Comments.OrderBy(x => x.CreatedOn))
-                            {
-                                <div class="comment-box">
-                                    <span class="commenter-pic">
-                                        <img src="@comment.User.AvatarUrl" class="img-fluid">
-                                    </span>
-                                    <span class="commenter-name">
-                                        <a href="#">@comment.User.UserName</a> <span class="comment-time">@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</span>
-                                    </span>
-                                    <p class="comment-txt more">@comment.Content</p>
-                                    <div class="comment-meta">
-                                        <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 99</button>
-                                        <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> 149</button>
-                                        <button class="comment-reply reply-popup"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
-                                    </div>
-                                    <div class="comment-box add-comment reply-box">
-                                        <span class="commenter-pic">
-                                            <img src="@Model.UserAvatarUrl" class="img-fluid">
-                                        </span>
-                                        <span class="commenter-name">
-                                            <input type="text" placeholder="Add a public reply" name="Add Comment">
-                                            <button type="submit" class="btn btn-default">Reply</button>
-                                            <button type="reset" class="btn btn-default reply-popup">Cancel</button>
-                                        </span>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    }
-                  
+
+                    @{await ShowNestedComments(null); }
+
+
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-
 </div>
 
-<script>
-    $("#vote").click(function (e) {
-        // Special stuff to do when this link is clicked...
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 
-        // Cancel the default action
-        e.preventDefault();
-    });
-</script>
+
 
 <script>
     function vote(postId, VoteType) {
         var token = $("#votesForm input[name=__RequestVerificationToken]").val();
-
         var json = { postId: postId, VoteType: VoteType };
-
         $.ajax({
             url: "/api/Vote",
             type: "POST",
@@ -303,7 +298,6 @@
                 $("#votesCount").html(data.count);
             }
         });
-
     };
 </script>
 
@@ -315,11 +309,23 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
 <script>
+    $("#thumbsUp").click(function () {
+        $("#thumbsUp").css("color", "blue");
+        $("#thumbsDown").css("color", "darkgrey");
+    });
+    $("#thumbsDown").click(function () {
+        $("#thumbsDown").css("color", "red");
+        $("#thumbsUp").css("color", "darkgrey");
+    });
+
+</script>
+
+<script>
     // Reply box popup JS
     $(document).ready(function () {
         $(".reply-popup").click(function () {
+            
             $(".reply-box").toggle();
         });
     });
-
 </script>

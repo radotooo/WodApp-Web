@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WodApp.Services;
-using WodApp.Services.Test;
+
 using Microsoft.AspNetCore.Http;
 using Wod.Data;
 using LearningSystem.Repository;
@@ -67,15 +67,16 @@ namespace WodApp
 
 
             services.AddDefaultIdentity<ApplicationUser>(options =>
-            { 
-            options.SignIn.RequireConfirmedAccount = true;
+            {
+                options.SignIn.RequireConfirmedAccount = true;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                
+
+
             })
-               
+
               .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
 
@@ -87,7 +88,6 @@ namespace WodApp
                 });
 
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IHomeService, HomeService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IPostService, PostService>();
@@ -125,8 +125,8 @@ namespace WodApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-           
-            
+
+
 
             if (env.IsDevelopment())
             {

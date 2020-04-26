@@ -13,12 +13,12 @@ namespace Wod.Services.FavoriteService
     public class FavoriteService : IFavoriteService
     {
         private readonly IRepository<Favorite> repository;
-        private readonly ApplicationDbContext dbContext;
+       
 
-        public FavoriteService(IRepository<Favorite> repository,ApplicationDbContext dbContext)
+        public FavoriteService(IRepository<Favorite> repository)
         {
             this.repository = repository;
-            this.dbContext = dbContext;
+           
         }
         public async Task<string> Create(int postId, string userId, string tittle)
         {
@@ -41,10 +41,10 @@ namespace Wod.Services.FavoriteService
         public async Task<string> Delete(string userId,int postId,string tittle)
         {
 
-           var entity =  repository.Get().FirstOrDefault(x => x.UserId == userId && x.PostId == postId);
+           var entity = this.repository.Get().FirstOrDefault(x => x.UserId == userId && x.PostId == postId);
            
            
-                await repository.RemoveAsync(entity);
+                await this.repository.RemoveAsync(entity);
 
             return $"{tittle} has beeen removed from your Favorites!";
 

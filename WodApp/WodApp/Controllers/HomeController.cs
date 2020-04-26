@@ -16,9 +16,9 @@ using Wod.Services.FavoriteService.Contracts;
 using Wod.Services.PostService.Contracts;
 using Wod.Services.VoteService;
 using Wod.Services.VoteService.Contracts;
-using WodApp.Data.Domain;
+
 using WodApp.Models;
-using WodApp.Services.Test;
+
 
 namespace WodApp.Controllers
 {
@@ -26,18 +26,17 @@ namespace WodApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHomeService homeService;
-        private readonly SignInManager<ApplicationUser> appUser;
+               private readonly SignInManager<ApplicationUser> appUser;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IPostService postService;
         private readonly IVoteSysService voteSysService;
         private readonly IFavoriteService favoriteService;
 
-        public HomeController(ILogger<HomeController> logger, IHomeService homeService, SignInManager<ApplicationUser> appUser,
-            ICloudinaryService cloudinaryService, IPostService postService, IVoteSysService voteSysService,IFavoriteService favoriteService)
+        public HomeController(ILogger<HomeController> logger,SignInManager<ApplicationUser> appUser,
+            ICloudinaryService cloudinaryService, IPostService postService, IVoteSysService voteSysService, IFavoriteService favoriteService)
         {
             _logger = logger;
-            this.homeService = homeService;
+            
             this.appUser = appUser;
             this.cloudinaryService = cloudinaryService;
             this.postService = postService;
@@ -65,7 +64,7 @@ namespace WodApp.Controllers
         [AllowAnonymous]
         public IActionResult Privacy()
         {
-           
+
             return View();
         }
 
@@ -78,34 +77,12 @@ namespace WodApp.Controllers
         public async Task<IActionResult> Favorite()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var favorite =  this.favoriteService.GetAll(userId);
+            var favorite = this.favoriteService.GetAll(userId);
             var model = await this.postService.GetAll(favorite);
-
-
-
-
-                return View(model);
-       
+            return View(model);
         }
 
 
-
-
-        [HttpPost]
-        public async Task<IActionResult> Add(CreateMovementInputModel model)
-        {
-            //if (!this.ModelState.IsValid)
-            //{
-            //    return this.View(model);
-
-            //}
-            var coverUrl = await this.cloudinaryService
-                .UploadAsync(model.CoverImage, "Test");
-            model.Name = coverUrl;
-            await this.homeService.GreateAsyns(model);
-
-            return View("Bravo", model);
-        }
 
         public async Task<IActionResult> SingOut(string returnUrl = null)
         {
@@ -129,7 +106,7 @@ namespace WodApp.Controllers
         }
 
 
-      
+
     }
 
 }
