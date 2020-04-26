@@ -5,3 +5,4 @@ C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\WodApp.GlobalValidation\obj\Deb
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\WodApp.GlobalValidation\obj\Debug\netcoreapp3.1\WodApp.GlobalValidation.AssemblyInfo.cs
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\WodApp.GlobalValidation\obj\Debug\netcoreapp3.1\WodApp.GlobalValidation.dll
 C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\WodApp.GlobalValidation\obj\Debug\netcoreapp3.1\WodApp.GlobalValidation.pdb
+C:\Users\Radotooo\source\repos\WodApp-Web\WodApp\WodApp.GlobalValidation\obj\Debug\netcoreapp3.1\WodApp.GlobalValidation.csprojAssemblyReference.cache

@@ -95,7 +95,8 @@ namespace Wod.Services.PostService
                     Comments = post.Comments,
                     PictureUrl = post.PictureUrl,
                     Tittle = post.Tittle,
-                    VoteCount = voteSysService.GetVoteCount(post.Id)
+                    VoteCount = voteSysService.GetVoteCount(post.Id),
+                    
                 });
             }
 
@@ -143,7 +144,8 @@ namespace Wod.Services.PostService
                     Comments = post.Comments,
                     PictureUrl = post.PictureUrl,
                     Tittle = post.Tittle,
-                    VoteCount = voteSysService.GetVoteCount(post.Id)
+                    VoteCount = voteSysService.GetVoteCount(post.Id),
+                    
                 });
             }
            

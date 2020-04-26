@@ -19,8 +19,6 @@
 <button id="sortCreate" class="btn btn-secondary active">Fresh</button>
 <button id="sortLike" class="btn btn-secondary disabled">Hot</button>
 
-
-
 <div id="CreatedOn">
     @{
         foreach (var post in Model.Posts.OrderByDescending(x => x.CreatedOn))
@@ -47,7 +45,7 @@
                             <div class="span8">
                                 <p></p>
                                 <p>
-                                    <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
+                                    <i class="fa fa-user"></i> by <a asp-controller="Profile" asp-action="ShowProfile" asp-route-username="@post.UserUsernameName">@post.UserUsernameName</a>
                                     | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
                                     | <i class="fa fa-comment"></i> <a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Comments @post.Comments.Count()</a>
                                     | <i class="fas fa-plus"></i> <a href="javascript:void(0);" onclick="vote(@post.Id,'@ViewData["userId"]','@post.Tittle')">Add to Favorites </a>
@@ -90,7 +88,7 @@
                             <div class="span8">
                                 <p></p>
                                 <p>
-                                    <i class="fa fa-user"></i> by <a href="#">@post.UserUsernameName</a>
+                                    <i class="fa fa-user"></i> by <a asp-controller="Profile" asp-action="ShowProfile" asp-route-username="@post.UserUsernameName">@post.UserUsernameName</a>
                                     | <i class="fa fa-calendar" style="color:Highlight"></i> @post.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
                                     | <i class="fa fa-comment"></i> <a asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Comments @post.Comments.Count()</a>
                                     | <i class="fas fa-share"></i> <a href="javascript:void(0);" onclick="vote(@post.Id,'@ViewData["userId"]','@post.Tittle')">Add to Favorites</a>
@@ -146,8 +144,7 @@
     </script>
     <script>
         function vote(postId,userId,name) {
-            console.log(`stanaaaaa ${postId}, ${userId}, ${name}`)
-            
+      
             var token = $("#votesForm input[name=__RequestVerificationToken]").val();
 
             var json = { postId: postId, userId: userId, tittle:name };

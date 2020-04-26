@@ -49,10 +49,7 @@ namespace Wod.Services.FavoriteService
             return $"{tittle} has beeen removed from your Favorites!";
 
         }
-           
-
-
-        //to do vzemi vsi4ki favriti ot tqh id-tata na postovete vzima6 postovete posle i sme gotovi
+          
         public IEnumerable<Favorite> GetAll(string userId)
         {
 

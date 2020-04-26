@@ -12,12 +12,12 @@ namespace Wod.Services.CommentService
 {
     public class CommentService : ICommentService
     {
-        private readonly IRepository<Comment> repository;
+       
         private readonly ApplicationDbContext dbContext;
 
-        public CommentService(IRepository<Comment> repository, ApplicationDbContext dbContext)
+        public CommentService(ApplicationDbContext dbContext)
         {
-            this.repository = repository;
+            
             this.dbContext = dbContext;
         }
         public async Task Greate(CreateCommentInputModel input)
@@ -32,7 +32,7 @@ namespace Wod.Services.CommentService
 
             };
            
-            await this.repository.AddAsync(comment);
+           
             await this.dbContext.Comments.AddAsync(comment);
             this.dbContext.SaveChanges();
             //await this.repository.AddAsync(comment);

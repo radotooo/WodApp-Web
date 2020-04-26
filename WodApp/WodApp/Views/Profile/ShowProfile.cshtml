@@ -16,14 +16,14 @@
             <div class="col-md-4">
                 <div class="profile-img">
                     <img src="@Model.AvatarUrl" />
-                   
+
                 </div>
-                
+
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        @(Model.FirstName+" "+Model.LastName)
+                        @(Model.FirstName + " " + Model.LastName)
                     </h5>
                     <div class="text-muted"><small>Joined @Model.CreatedOn.ToString("dddd dd MMMM yyyy")</small></div>
 
@@ -39,9 +39,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" >Edit Profile</a>
-            </div>
+          
         </div>
         <div class="row">
             <div class="col-md-4">

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wod.Data;
 using Wod.Models.WodApp.VIewModels;
+using Wod.Services.ProfileService.Contracts;
 
 namespace WodApp.Controllers
 {
@@ -14,10 +15,12 @@ namespace WodApp.Controllers
     public class ProfileController : Controller
     {
         private readonly UserManager<ApplicationUser> usermanager;
+        private readonly IprofileService profileService;
 
-        public ProfileController(UserManager<ApplicationUser> usermanager)
+        public ProfileController(UserManager<ApplicationUser> usermanager,IprofileService profileService)
         {
             this.usermanager = usermanager;
+            this.profileService = profileService;
         }
         public async Task<IActionResult> Index()
         {
@@ -37,10 +40,16 @@ namespace WodApp.Controllers
             return View(model);
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> ShowProfile(string username)
         {
+            var currentUser = await usermanager.GetUserAsync(User);
+            if(username == currentUser.UserName)
+            {
+               return RedirectToAction("Index");
+            }
+            var model = profileService.GetByUsername(username);
+            return View(model);
 
-            return View();
         }
 
         public IActionResult ChangePicture()

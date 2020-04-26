@@ -36,6 +36,8 @@ using Wod.Services.VoteService.Contracts;
 using Wod.Services.VoteService;
 using Wod.Services.FavoriteService.Contracts;
 using Wod.Services.FavoriteService;
+using Wod.Services.ProfileService.Contracts;
+using Wod.Services.ProfileService;
 
 namespace WodApp
 {
@@ -95,13 +97,9 @@ namespace WodApp
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IVoteSysService, VoteSysService>();
             services.AddTransient<IFavoriteService, FavoriteService>();
+            services.AddTransient<IprofileService, ProfileService>();
 
-
-
-
-
-
-
+           
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddControllersWithViews();
@@ -151,10 +149,15 @@ namespace WodApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                   name: "admninRoute",
+                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                   );
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("Posts", "{controller=Post}/{action=ShowPost}/{id?}");
-                endpoints.MapControllerRoute("Category", "{controller=Post}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute("Posts", "{controller=Post}/{action=ShowPost}/{id?}");
+                //endpoints.MapControllerRoute("Category", "{controller=Post}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages();
             });

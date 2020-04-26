@@ -14,8 +14,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Wod.Data;
-using Wod.Models;
+
 using Wod.Models.Common;
+using WodApp.GlobalValidation;
 
 namespace WodApp.Areas.Identity.Pages.Account
 {
@@ -93,8 +94,8 @@ namespace WodApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                
-                
+
+
                 var user = new ApplicationUser
                 {
                     UserName = Input.Username,

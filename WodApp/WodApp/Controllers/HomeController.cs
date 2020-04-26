@@ -61,7 +61,9 @@ namespace WodApp.Controllers
             return View(model);
         }
 
+
         [AllowAnonymous]
+        [Area("Identity")]
         public IActionResult Privacy()
         {
 
