@@ -38,6 +38,7 @@ using Wod.Services.FavoriteService.Contracts;
 using Wod.Services.FavoriteService;
 using Wod.Services.ProfileService.Contracts;
 using Wod.Services.ProfileService;
+using Wod.Data.SeedingData;
 
 namespace WodApp
 {
@@ -58,15 +59,16 @@ namespace WodApp
             //        Configuration.GetConnectionString("DefaultConnection"))) ;
             services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential 
-                // cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                // requires using Microsoft.AspNetCore.Http;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    // This lambda determines whether user consent for non-essential 
+            //    // cookies is needed for a given request.
+            //    options.CheckConsentNeeded = context => true;
+            //    // requires using Microsoft.AspNetCore.Http;
+            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //});
 
+            
 
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {
@@ -78,16 +80,18 @@ namespace WodApp
 
 
             })
-
-              .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
 
-            services.Configure<CookiePolicyOptions>(
-                options =>
-                {
-                    options.CheckConsentNeeded = context => true;
-                    options.MinimumSameSitePolicy = SameSiteMode.None;
-                });
+          
+
+            //services.Configure<CookiePolicyOptions>(
+            //    options =>
+            //    {
+            //        options.CheckConsentNeeded = context => true;
+            //        options.MinimumSameSitePolicy = SameSiteMode.None;
+            //    });
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -109,6 +113,11 @@ namespace WodApp
             });
             services.AddRazorPages();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+            });
+
             Account account = new CloudinaryDotNet.Account(
                this.Configuration["Cloudinary:CloudName"],
                this.Configuration["Cloudinary:ApiKey"],
@@ -121,9 +130,18 @@ namespace WodApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
 
+            //using (var serviceScope = app.ApplicationServices.CreateScope())
+            //{
+            //    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            //    new ApplicationDbContexSeeder(dbContext, serviceScope.ServiceProvider)
+            //    .SeedDataAsync()
+            //    .GetAwaiter()
+            //    .GetResult();
+            //}
 
 
             if (env.IsDevelopment())
@@ -139,7 +157,9 @@ namespace WodApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -161,6 +181,28 @@ namespace WodApp
 
                 endpoints.MapRazorPages();
             });
+
+            //CreateRoles(services).Wait();
+        }
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            IdentityResult roleResult;
+            //here in this line we are adding Admin Role
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                //here in this line we are creating admin role and seed it to the database
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            //here we are assigning the Admin role to the User that we have registered above 
+            //Now, we are assinging admin role to this user("Ali@gmail.com"). When will we run this project then it will
+            //be assigned to that user.
+            ApplicationUser user = await UserManager.FindByEmailAsync("radotooo@gmail.com");
+            var User = new ApplicationUser();
+            await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
 }

@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Wod.Data.ApplicationUser> UserManager
+
+<!doctype html>
+
+<html lang="en">
+<head>
+
+    <title>@ViewData["Title"] - WodApp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+
+        <nav id="sidebar" style="background-color:darkred">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                </button>
+            </div>
+            <div class="img bg-wrap text-center py-4" style="background-image: url(/images/bg_1.jpg);">
+                <div class="user-logo">
+                    <div class="img" style="background-image: url('@UserManager.GetUserAsync(User).Result.AvatarUrl');"></div>
+                    <h3>@UserManager.GetUserAsync(User).Result.UserName</h3>
+                </div>
+            </div>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a asp-area="" asp-controller="Home" asp-action="Index"><span class="fa fa-home mr-3"></span> Home</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Post" asp-action="Create"><span class="fa fa-plus mr-3"><small class="d-flex align-items-center justify-content-center"></small></span> Create Post</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Favorite"><span class="fa fa-gift mr-3"></span> Favorite</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-trophy mr-3"></span> Top Review</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Profile" asp-action="Index"><span class="fa fa-user mr-3"></span> Profile</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
+
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="SingOut" asp-route-returnUrl="@Url.Action("Index","Home")"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+                </li>
+            </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+

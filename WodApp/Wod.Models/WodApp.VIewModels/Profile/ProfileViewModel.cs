@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Wod.Data.Models;
 
-
-namespace Wod.Models.WodApp.VIewModels
+namespace Wod.Models.WodApp.VIewModels.Profile
 {
-    public class UserViewModel
+    public class ProfileViewModel
     {
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
         public string AvatarUrl { get; set; }
         public DateTime CreatedOn { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-       
 
     }
 }

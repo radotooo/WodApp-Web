@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wod.Data;
 using Wod.Models.WodApp.VIewModels;
+using Wod.Services.PostService.Contracts;
 using Wod.Services.ProfileService.Contracts;
 
 namespace WodApp.Controllers
@@ -16,11 +17,13 @@ namespace WodApp.Controllers
     {
         private readonly UserManager<ApplicationUser> usermanager;
         private readonly IprofileService profileService;
+        private readonly IPostService postService;
 
-        public ProfileController(UserManager<ApplicationUser> usermanager,IprofileService profileService)
+        public ProfileController(UserManager<ApplicationUser> usermanager, IprofileService profileService, IPostService postService)
         {
             this.usermanager = usermanager;
             this.profileService = profileService;
+            this.postService = postService;
         }
         public async Task<IActionResult> Index()
         {
@@ -32,10 +35,10 @@ namespace WodApp.Controllers
                 LastName = currentUser.LastName,
                 AvatarUrl = currentUser.AvatarUrl,
                 CreatedOn = currentUser.CreatedOn,
-                Username= currentUser.UserName,
-                Email=currentUser.Email,
-                Phone=currentUser.PhoneNumber
-         
+                Username = currentUser.UserName,
+                Email = currentUser.Email,
+                Phone = currentUser.PhoneNumber,
+
             };
             return View(model);
         }
@@ -43,19 +46,14 @@ namespace WodApp.Controllers
         public async Task<IActionResult> ShowProfile(string username)
         {
             var currentUser = await usermanager.GetUserAsync(User);
-            if(username == currentUser.UserName)
+            if (username == currentUser.UserName)
             {
-               return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
-            var model = profileService.GetByUsername(username);
+            var model = this.profileService.GetByUsername(username);
             return View(model);
-
         }
 
-        public IActionResult ChangePicture()
-        {
 
-            return View();
-        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wod.Models.WodApp.VIewModels.Post;
 using Wod.Services.PostService.Contracts;
@@ -20,6 +21,8 @@ namespace WodApp.Controllers
             this.postService = postService;
             this.voteSysService = voteSysService;
         }
+
+        
         public IActionResult Index(string category)
         {
             var model = new IndexPostViewModel

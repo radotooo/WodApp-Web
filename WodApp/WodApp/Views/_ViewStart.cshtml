@@ -1,12 +1,12 @@
 ﻿@{
-    if (!Context.User.Identity.IsAuthenticated)
-    {
-        Layout = "_LayoutUser";
-    }
-    else
-    {
+    //if (User.IsInRole("Admin"))
+    //{
+    //    Layout = "";
+    //}
+    //else
+    //{
     Layout = "_LayoutUser";
 
-    }
+
 }
 

@@ -47,6 +47,10 @@ namespace WodApp.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Test", new { area = "Administration" });
+            }
             var model = new IndexPostViewModel
             {
                 Posts = postService.GetAll()
@@ -76,6 +80,7 @@ namespace WodApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        
         public async Task<IActionResult> Favorite()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
